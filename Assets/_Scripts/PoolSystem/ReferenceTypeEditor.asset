@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f60d1c11029d3a409ae2864eb8c2a49, type: 3}
   m_Name: ReferenceTypeEditor
   m_EditorClassIdentifier: 
-  Data: []
-  NewFilePath: 
+  Data:
+  - Name: 
+    NameSpace: 
+    Parent: 
+  NewFilePath: Assets/_Scripts/PoolSystem
