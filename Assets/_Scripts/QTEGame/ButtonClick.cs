@@ -24,7 +24,11 @@ public class ButtonClick : MonoBehaviour
         {
             image.transform.localScale += Vector3.one * 0.002f * Time.timeScale;//判定部分随时间增大       
         }
-        imageScale = image.transform.localScale;        
+        imageScale = image.transform.localScale;     
+        if (image.transform.localScale.x - Vector3.one.x * 1.2f > 0)
+        {
+            NotClicked();
+        }
     }
     /// <summary>
     /// 用于判定点击按钮精确度的方法
@@ -48,7 +52,7 @@ public class ButtonClick : MonoBehaviour
             print("Bad");
             print(difference);
         }
-        
+        anim.SetBool("IsClicked", true);
         
     }
     //动画之后摧毁物体
@@ -56,5 +60,11 @@ public class ButtonClick : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    
+    //超时没点
+    public void NotClicked()
+    {
+        isClicked = true;
+        print("Miss");
+        anim.SetBool("IsClicked", true);
+    }
 }
