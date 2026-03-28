@@ -21,6 +21,12 @@ public class UIController : Singleton<UIController>
     [SerializeField] Color fullTiringColor = Color.red;
     [SerializeField] Color midTiringColor = Color.yellow;
     [SerializeField] Color lowTiringColor = Color.green;
+    [Header("UI◊¥Ã¨")]
+    public bool isPaused = false;
+    public bool isAudioOpen = false;
+    [Header("…Ë÷√√Ê∞Â")]
+    public GameObject SettingPanel;
+    public GameObject AudioPanel;
 
     void Start()
     {
@@ -31,6 +37,8 @@ public class UIController : Singleton<UIController>
     {
         RefreshBattery();
         RefreshTiring();
+
+        if (Input.GetKeyDown(KeyCode.Escape)) HandleESC();
     }
 
     IEnumerator UpdateTime()
@@ -58,5 +66,47 @@ public class UIController : Singleton<UIController>
         if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; return; }
         if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; return; }
         tiringFillImage.color = lowTiringColor;
+    }
+
+    public void SetPause()
+    {
+        Time.timeScale = 0f;
+        isPaused = true;
+        SettingPanel.SetActive(true);
+    }
+
+    public void SetPlay()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
+        SettingPanel.SetActive(false);
+    }
+
+    public void SetAudioActive()
+    {
+        SettingPanel.SetActive(false);
+        AudioPanel.SetActive(true);
+        isAudioOpen = true;
+    }
+
+    public void CloseAudioPanel()
+    {
+        AudioPanel.SetActive(false);
+        SettingPanel.SetActive(true);
+        isAudioOpen = false;
+    }
+
+    void HandleESC()
+    {
+        if (isPaused)
+        {
+            if (isAudioOpen) { CloseAudioPanel(); isAudioOpen = false; return; }
+            else { SetPlay(); return; }
+        }
+        else
+        {
+            SetPause();
+        }
+
     }
 }
