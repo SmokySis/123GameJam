@@ -65,4 +65,35 @@ namespace TaskSystem.Test
             }
         }
     }
+    [Serializable]
+    public sealed class APPOpenSubscriber : IEventSubscriber
+    {
+        public IEnumerable<IEventListener> GetEventListeners(int taskID)
+        {
+            Debug.Log("111");
+            yield return new Listener(taskID);
+        }
+
+        public IEventSubscriber DeepCopy()
+        {
+            return new APPOpenSubscriber();
+        }
+
+        [Serializable]
+        private sealed class Listener : EventListener<APPOpenEvent>
+        {
+            private readonly int _taskID;
+
+            public Listener(int taskID)
+            {
+                _taskID = taskID;
+            }
+
+            protected override void OnEvent(in APPOpenEvent gameEvent)
+            {
+                TaskManager.Instance.RequestActivateTask(_taskID);
+                
+            }
+        }
+    }
 }

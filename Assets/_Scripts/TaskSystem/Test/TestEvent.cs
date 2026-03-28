@@ -6,4 +6,5 @@ namespace TaskSystem.Test
     {
     }
     public readonly struct GameEndEvent : IGameEvent { }
+    public readonly struct APPOpenEvent : IGameEvent { }
 }
