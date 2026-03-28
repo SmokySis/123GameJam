@@ -1,3 +1,4 @@
+using AudioSystem;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -13,7 +14,20 @@ public class UIController : Singleton<UIController>
     [SerializeField] TextMeshProUGUI batteryText;
     [Header("UI组件_疲劳度")]
     [SerializeField] public float tiringPercent = 0f;
-    [SerializeField] Image tiringFillImage; 
+    [SerializeField] Image tiringFillImage;
+    [Header("Audio接口")]
+    AudioMixerRouter mixer;
+    [Header("UI组件_音量")]
+    [SerializeField] Slider masterSlider;
+    [SerializeField] Slider bgmSlider;
+    [SerializeField] Slider sfxSlider;
+    [SerializeField] TextMeshProUGUI masterText;
+    [SerializeField] TextMeshProUGUI bgmText;
+    [SerializeField] TextMeshProUGUI sfxText;
+    [Header("音量大小")]
+    float masterVolume = 1;
+    float bgmVolume = 1;
+    float sfxVolume = 1;
     [Header("Color")]
     [SerializeField] Color fullBatteryColor = Color.green;
     [SerializeField] Color midBatteryColor = Color.yellow;
@@ -22,15 +36,23 @@ public class UIController : Singleton<UIController>
     [SerializeField] Color midTiringColor = Color.yellow;
     [SerializeField] Color lowTiringColor = Color.green;
     [Header("UI状态")]
-    public bool isPaused = false;
-    public bool isAudioOpen = false;
+    [HideInInspector]public bool isPaused = false;
+    [HideInInspector]public bool isAudioOpen = false;
     [Header("设置面板")]
     public GameObject SettingPanel;
     public GameObject AudioPanel;
 
+    private void Awake()
+    {
+        base.Awake();
+        mixer = AudioManager.Instance.Router;
+    }
     void Start()
     {
         StartCoroutine(UpdateTime());
+        masterSlider.onValueChanged.AddListener(OnMasterSliderValueChanged);
+        bgmSlider.onValueChanged.AddListener(OnBGMSliderValueChanged);
+        sfxSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
     }
 
     private void Update()
@@ -108,5 +130,39 @@ public class UIController : Singleton<UIController>
             SetPause();
         }
 
+    }
+
+    void OnMasterSliderValueChanged(float value)
+    {
+        masterVolume = value;
+        masterText.text = ((int)(value * 100)).ToString();
+        RefreshVolumn();
+    }
+
+    void OnBGMSliderValueChanged(float value)
+    {
+        bgmVolume = value;
+        bgmText.text = ((int)(value * 100)).ToString();
+        RefreshVolumn();    
+    }
+
+    void OnSFXSliderValueChanged(float value)
+    {
+        sfxVolume = value;
+        sfxText.text = ((int)(value * 100)).ToString();
+        RefreshVolumn();
+    }
+
+    void RefreshVolumn()
+    {
+        mixer.TrySetBusVolume(AudioBus.BGM,bgmVolume * masterVolume);
+        mixer.TrySetBusVolume(AudioBus.SFX,sfxVolume * masterVolume);
+    }
+
+    void InitVolumn()
+    {
+        masterSlider.value = masterVolume;
+        bgmSlider.value = bgmVolume;
+        sfxSlider.value = sfxVolume;
     }
 }
