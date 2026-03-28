@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e0213557993bd4dac17cae1e31735b, type: 3}
+  m_Name: AudioMixerRouter
+  m_EditorClassIdentifier: 
+  _mixer: {fileID: 24100000, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+  _pairs:
+  - bus: 0
+    mixerGroup: {fileID: 24300002, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_Master
+  - bus: 1
+    mixerGroup: {fileID: 1834163817671659819, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_BGM
+  - bus: 2
+    mixerGroup: {fileID: 5464281486963452217, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_SFX
+  - bus: 3
+    mixerGroup: {fileID: 2925403065532119031, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_UI
+  - bus: 4
+    mixerGroup: {fileID: 7218254789805564621, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_Voice
+  - bus: 5
+    mixerGroup: {fileID: -7673463483213637486, guid: 535857986aec4e9488687b83f560cc6c, type: 2}
+    volumeParam: Vol_Ambient
