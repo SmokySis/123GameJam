@@ -21,6 +21,7 @@ namespace AudioSystem
         private readonly Dictionary<string, float> _lastPlayTime = new();
         private readonly Dictionary<string, int> _playingCount = new();
         private readonly Dictionary<int, PooledAudioSource> _active = new();
+        public AudioMixerRouter Router => _router;
         /// <summary>
         /// ≤•∑≈“Ù∆µ
         /// </summary>

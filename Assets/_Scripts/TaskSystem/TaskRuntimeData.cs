@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace TaskSystem
 {
     public enum TaskState
@@ -16,6 +18,7 @@ namespace TaskSystem
         public bool PendingFail;
         public bool IsActivated => State == TaskState.Active;
         public bool IsCompleted => State == TaskState.Completed;
+        public GameObject TextObj;
     }
 
 }

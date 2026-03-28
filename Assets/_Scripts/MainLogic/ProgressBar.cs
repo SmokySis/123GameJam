@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TaskSystem;
 
 public class ProgressBar : MonoBehaviour
 {    

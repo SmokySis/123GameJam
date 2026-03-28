@@ -1,7 +1,10 @@
+using DG.Tweening;
+using PoolSystem;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Utility;
 
 namespace TaskSystem
@@ -12,6 +15,14 @@ namespace TaskSystem
         private int _maxNecessaryCount = 3;
         [SerializeField, LabelText("最大同时可存在的可选任务")]
         private int _maxUnnecessaryCount = 5;
+        [SerializeField, LabelText("必要任务信息栏父对象")]
+        private Transform _necessaryParent;
+        [SerializeField, LabelText("可选任务信息栏父对象")]
+        private Transform _unnecessaryParent;
+        [SerializeField, LabelText("信息预制体")]
+        private GameObject _textPrefab;
+        [SerializeField, LabelText("文本出现速度")]
+        private float charsPerSecond = 20f;
         private readonly Dictionary<int, Task> _idToTask = new();
         private readonly HashSet<int> _waitingTasks = new();
         private readonly HashSet<int> _activeNecessaryTasks = new();
@@ -41,6 +52,21 @@ namespace TaskSystem
             if (_isInitialized)
             {
                 Debug.LogWarning("TaskManager Initialize Warning: Already Initialized.");
+                return;
+            }
+            if (_necessaryParent == null)
+            {
+                Debug.LogError("TaskManager Initialize Error: NecessaryParent Is Null");
+                return;
+            }
+            if (_unnecessaryParent == null)
+            {
+                Debug.LogError("TaskManager Initialize Error: UnnecessaryParent Is Null");
+                return;
+            }
+            if (_textPrefab == null)
+            {
+                Debug.LogError("TaskManager Initialize Error: TextPrefab Is Null");
                 return;
             }
             if (allTaskData == null)
@@ -149,6 +175,7 @@ namespace TaskSystem
                 _activeNecessaryTasks.Add(taskID);
             else
                 _activeUnnecessaryTasks.Add(taskID);
+            ShowInfo(task);
             OnTaskActivated?.Invoke(task);
             return true;
         }
@@ -168,6 +195,7 @@ namespace TaskSystem
             task.RuntimeData.PendingFail = false;
             _completedTasks.Add(taskID);
             OnTaskCompleted?.Invoke(task);
+            HideInfo(task);
             return true;
         }
         private bool FailTask(int taskID)
@@ -229,6 +257,76 @@ namespace TaskSystem
             }
             _idToTask.Remove(taskID);
             return true;
+        }
+        private void ShowInfo(Task task)
+        {
+            GameObject textObj;
+            if (task.Data.IsNecessary)
+                textObj = GameObjectPoolCenter.Instance.GetInstance(_textPrefab, Vector3.zero, Quaternion.identity, parent: _necessaryParent, changeParent: true);
+            else
+                textObj = GameObjectPoolCenter.Instance.GetInstance(_textPrefab, Vector3.zero, Quaternion.identity, parent: _unnecessaryParent, changeParent: true);
+            Text uiText = textObj.GetComponent<Text>();
+            if (uiText == null)
+            {
+                Debug.LogError("ShowInfo Error: Text Component Is Null.");
+                return;
+            }
+            string content = task.Data.Description ?? string.Empty;
+            uiText.text = string.Empty;
+            int currentCount = 0;
+            float duration = content.Length <= 0 ? 0f : content.Length / charsPerSecond;
+            DOTween.To(() => currentCount, x => { currentCount = x; uiText.text = content.Substring(0, currentCount); }, content.Length, duration).SetEase(Ease.Linear);
+            task.RuntimeData.TextObj = textObj;
+        }
+        private void HideInfo(Task task)
+        {
+            if (task == null || task.RuntimeData == null || task.RuntimeData.TextObj == null)
+                return;
+            GameObject textObj = task.RuntimeData.TextObj;
+            Text uiText = textObj.GetComponent<Text>();
+            if (uiText == null)
+            {
+                GameObjectPoolCenter.Instance.Release(textObj);
+                task.RuntimeData.TextObj = null;
+                return;
+            }
+            DOTween.Kill(textObj);
+            Color originalColor = uiText.color;
+            Color greenColor = Color.green;
+            greenColor.a = originalColor.a;
+            Sequence seq = DOTween.Sequence().SetTarget(textObj);
+            // 先变绿
+            seq.Append(
+                DOTween.To(
+                    () => 0f,
+                    t =>
+                    {
+                        uiText.color = Color.Lerp(originalColor, greenColor, t);
+                    },
+                    1f,
+                    0.15f
+                ).SetEase(Ease.Linear)
+            );
+            // 再淡出
+            seq.Append(
+                DOTween.To(
+                    () => uiText.color.a,
+                    a =>
+                    {
+                        Color c = uiText.color;
+                        c.a = a;
+                        uiText.color = c;
+                    },
+                    0f,
+                    0.5f
+                ).SetEase(Ease.Linear)
+            );
+            seq.OnComplete(() =>
+            {
+                uiText.color = originalColor;
+                GameObjectPoolCenter.Instance.Release(textObj);
+                task.RuntimeData.TextObj = null;
+            });
         }
         public void FlushLifecycleRequests()
         {
