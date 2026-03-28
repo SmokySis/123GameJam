@@ -8,7 +8,7 @@ public class Typing : MonoBehaviour
 {
     public Text myText;
     public Text targetText;
-    bool isEqual;
+    public bool isEqual;
 
     private void Start()
     {

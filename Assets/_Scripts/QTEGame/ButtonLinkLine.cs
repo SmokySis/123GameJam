@@ -5,7 +5,7 @@ using System.Linq;
 
 
 public class ButtonLinkLine : MonoBehaviour
-{    
+{        
     public RectTransform panel;
     public GameObject linePrefab;   
     public Button[] targetButtons; //这个数组用于计录按钮 
@@ -13,11 +13,11 @@ public class ButtonLinkLine : MonoBehaviour
     private List<GameObject> lineList = new List<GameObject>();
     private ButtonLinkLineTemplate template;
     public int[] buttons = new int[9];//这个数组用于接收模板的顺序索引
-    public int[] myButtons = new int[9];//这个数组用于计录点击连线的索引
+    public int[] myButtons = new int[9];//这个数组用于计录点击连线的索引  
+    public bool isCompleted = false;
+
     void Start()
-    {
-
-
+    {        
         template = GameObject.FindWithTag("Template").GetComponent<ButtonLinkLineTemplate>();
         // 遍历所有按钮，给每个按钮添加点击事件
         for (int i = 0; i < targetButtons.Length; i++)
@@ -115,6 +115,7 @@ public class ButtonLinkLine : MonoBehaviour
         {
             print("Bad");
         }
-
-    }
+        isCompleted = same || same2;
+    }  
+    
 }

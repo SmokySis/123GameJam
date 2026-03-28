@@ -1,22 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonClickManager : MonoBehaviour
 {
+    public Slider slider;
+    private ProgressBar progressBar;
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//承载的panel   
     public int spawnCount = 10;
     public float squareSize = 100f;    
     public float minDistance = 110f;
     private List<Vector2> spawnPoints = new List<Vector2>();
+    bool isStart = false;
+    bool isGenerate = false;
+    public float startTime = 0.25f;
     private void Start()
     {
-        GenerateNonOverlappingPoints();
-        if(spawnPoints.Count == 10)
+        progressBar = slider.GetComponent<ProgressBar>();
+    }
+    private void Update()
+    {
+        //等到开始任务后几秒再开始造点
+        if(progressBar.GetProgress() > startTime && !isStart)
         {
-            StartCoroutine(Generate());
+            isStart = true;
+            GenerateNonOverlappingPoints();
         }
+        if(spawnPoints.Count == 10 && !isGenerate)
+        {
+            isGenerate = true;
+            StartCoroutine(Generate());        
+        }
+        
     }
     // 生成不重叠的随机点
     void GenerateNonOverlappingPoints()
