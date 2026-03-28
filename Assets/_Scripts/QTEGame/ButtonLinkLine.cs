@@ -7,11 +7,18 @@ using System.Linq;
 public class ButtonLinkLine : MonoBehaviour
 {        
     public RectTransform panel;
-    public GameObject linePrefab;   
+    public GameObject linePrefab;
+    
     public Button[] targetButtons; //这个数组用于计录按钮 
+    public int maxClickCount = 9;     // 最多点几个按钮（数组上限）
+
     public List<Button> clickList = new List<Button>();
     private List<GameObject> lineList = new List<GameObject>();
     private ButtonLinkLineTemplate template;
+
+    private GameObject currentFollowLine; // 当前跟随鼠标的线
+    private Button lastBtn;
+
     public int[] buttons = new int[9];//这个数组用于接收模板的顺序索引
     public int[] myButtons = new int[9];//这个数组用于计录点击连线的索引  
     public bool isCompleted = false;
@@ -27,7 +34,14 @@ public class ButtonLinkLine : MonoBehaviour
         }
         
     }
-
+    void Update()
+    {
+        // 如果有正在跟随鼠标的线，并且还没点满
+        if (currentFollowLine != null && clickList.Count < maxClickCount)
+        {
+            UpdateFollowLineToMouse();
+        }
+    }
     /// <summary>
     /// 按钮点击时执行
     /// </summary>
@@ -36,45 +50,82 @@ public class ButtonLinkLine : MonoBehaviour
         // 如果这个按钮已经点过了，直接返回，不重复添加
         if (clickList.Contains(btn))
             return;
-
+        // 已经点满了，不再响应
+        if (clickList.Count >= maxClickCount)
+            return;
         // 把当前点击的按钮加入列表
         clickList.Add(btn);
-
-        // 至少两个点才画线
-        if (clickList.Count >= 2)
+        
+        // 如果是第一个按钮：只创建跟随线
+        if (clickList.Count == 1)
         {
-            Button lastBtn = clickList[clickList.Count - 2];
-            Button currBtn = clickList[clickList.Count - 1];
+            lastBtn = btn;
+            CreateFollowLine(btn);
+        }
+    
+        else
+        {
+            // 固定上一条跟随线到当前按钮
+            FixLastLineTo(btn);
 
-            DrawLineBetween(lastBtn, currBtn);
+            // 没点满才继续创建新跟随线
+            if (clickList.Count<maxClickCount)
+            {
+                lastBtn = btn;
+                CreateFollowLine(btn);
+            }
+            else
+            {
+                currentFollowLine = null;
+            }
         }
     }
-
-    void DrawLineBetween(Button from, Button to)
+    // 创建一条：一端粘按钮，另一端跟鼠标
+    void CreateFollowLine(Button fromBtn)
     {
-        // 生成线
-        GameObject line = Instantiate(linePrefab, panel);
+        var line = Instantiate(linePrefab, panel);
+        RectTransform fromRect = fromBtn.GetComponent<RectTransform>();
         RectTransform lineRect = line.GetComponent<RectTransform>();
-        RectTransform fromRect = from.GetComponent<RectTransform>();
-        RectTransform toRect = to.GetComponent<RectTransform>();
 
-        // 两点位置
-        Vector2 fromPos = fromRect.anchoredPosition;
-        Vector2 toPos = toRect.anchoredPosition;
-
-        // 中点
-        lineRect.anchoredPosition = (fromPos + toPos) / 2f;
-
-        // 长度
-        float distance = Vector2.Distance(fromPos, toPos);
-        lineRect.sizeDelta = new Vector2(distance, 8); // 8是线宽
-
-        // 角度
-        Vector2 dir = toPos - fromPos;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        lineRect.localEulerAngles = new Vector3(0, 0, angle);
-
+        // 初始化位置，避免瞬间闪一下
+        Vector2 a = fromRect.anchoredPosition;
+        lineRect.anchoredPosition = a;
+        lineRect.sizeDelta = new Vector2(0, 8);
+        currentFollowLine = line;
         lineList.Add(line);
+    }
+    // 把跟随线固定到目标按钮
+    void FixLastLineTo(Button targetBtn)
+    {
+        if (currentFollowLine == null) return;
+
+        var fromRect = lastBtn.GetComponent<RectTransform>();
+        var toRect = targetBtn.GetComponent<RectTransform>();
+        var lineRect = currentFollowLine.GetComponent<RectTransform>();
+
+        Vector2 a = fromRect.anchoredPosition;
+        Vector2 b = toRect.anchoredPosition;
+
+        lineRect.anchoredPosition = (a + b) / 2f;
+        lineRect.sizeDelta = new Vector2(Vector2.Distance(a, b), 8);
+
+        float angle = Mathf.Atan2(b.y - a.y, b.x - a.x) * Mathf.Rad2Deg;
+        lineRect.localEulerAngles = new Vector3(0, 0, angle);
+    }
+    // 更新跟随线：一端 lastBtn，一端鼠标
+    void UpdateFollowLineToMouse()
+    {
+        var lineRect = currentFollowLine.GetComponent<RectTransform>();
+        var fromRect = lastBtn.GetComponent<RectTransform>();
+
+        Vector2 a = fromRect.anchoredPosition;
+        Vector2 b = panel.InverseTransformPoint(Input.mousePosition); // 鼠标转 UI 局部坐标
+
+        lineRect.anchoredPosition = (a + b) / 2f;
+        lineRect.sizeDelta = new Vector2(Vector2.Distance(a, b), 8);
+
+        float angle = Mathf.Atan2(b.y - a.y, b.x - a.x) * Mathf.Rad2Deg;
+        lineRect.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     /// <summary>
@@ -82,12 +133,14 @@ public class ButtonLinkLine : MonoBehaviour
     /// </summary>
     public void ClearAll()
     {
-        foreach (var line in lineList)
+        foreach (var l in lineList)
         {
-            Destroy(line);
+            Destroy(l);
         }
         lineList.Clear();
         clickList.Clear();
+        currentFollowLine = null;
+        lastBtn = null;
     }
     /// <summary>
     /// 提交
