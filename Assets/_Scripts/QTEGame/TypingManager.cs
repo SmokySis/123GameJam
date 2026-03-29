@@ -49,6 +49,7 @@ public class TypingManager : MonoBehaviour
             text = Instantiate(targetText, panel);
             field = Instantiate(inputField, panel);
             typing = field.GetComponent<Typing>();
+            text.GetComponent<TextGeneration>().difficulty = this.diffculty;
         }
         if (field != null && typing.isEqual)
         {
