@@ -8,7 +8,9 @@ public class ButtonLinkLine : MonoBehaviour
 {        
     public RectTransform panel;
     public GameObject linePrefab;
-    
+    public Camera uiCamera;
+
+
     public Button[] targetButtons; //这个数组用于计录按钮 
     public int maxClickCount = 9;     // 最多点几个按钮（数组上限）
 
@@ -32,7 +34,7 @@ public class ButtonLinkLine : MonoBehaviour
             int index = i;
             targetButtons[index].onClick.AddListener(() => OnBtnClick(targetButtons[index]));
         }
-        
+        uiCamera = GameObject.FindWithTag("MainCamera").gameObject.GetComponent<Camera>();
     }
     void Update()
     {      
@@ -123,7 +125,16 @@ public class ButtonLinkLine : MonoBehaviour
         var fromRect = lastBtn.GetComponent<RectTransform>();
 
         Vector2 a = fromRect.anchoredPosition;
-        Vector2 b = panel.InverseTransformPoint(Input.mousePosition); // 鼠标转 UI 局部坐标
+        //正确转换鼠标坐标到 UI 局部坐标（修复关键）
+        Vector2 mouseUIPos;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            panel,                  // 你的父面板
+            Input.mousePosition,    // 鼠标屏幕坐标
+            uiCamera,                   // 画布相机 Overlay 模式填 null
+            out mouseUIPos          // 输出正确的 UI 坐标
+        );
+
+        Vector2 b = mouseUIPos;
 
         lineRect.anchoredPosition = (a + b) / 2f;
         lineRect.sizeDelta = new Vector2(Vector2.Distance(a, b), 8);
