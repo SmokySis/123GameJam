@@ -199,7 +199,6 @@ public class UIController : Singleton<UIController>
         rect.gameObject.SetActive(true);
         while (rect.anchoredPosition.x > UIPostion.x)
         {
-            Debug.Log("Sliding");
             rect.anchoredPosition = new Vector2(rect.anchoredPosition.x - slideInSpeed * Time.deltaTime, rect.anchoredPosition.y);
             if (rect.anchoredPosition.x < UIPostion.x) rect.anchoredPosition = UIPostion;
             yield return null;
@@ -235,6 +234,8 @@ public class UIController : Singleton<UIController>
 
     IEnumerator ShowDialogueCoroutine()
     {
+        if (detailedMessages == null) yield break;
+
         for (int i = 0;i < detailedMessages.Count;i++)
         {
             messageContainers[i].gameObject.SetActive(true);

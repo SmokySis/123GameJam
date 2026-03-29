@@ -8,12 +8,13 @@ public class TextContainer : MonoBehaviour
     public Text dialogueText;
     public Sprite dialogueBackground;
     public Sprite dialoguePicture;
+    [SerializeField] Image BackgroundImage;
     [SerializeField] RectTransform TextRect;
     [SerializeField] RectTransform BackgroundRect;
 
     private void Start()
     {
-
+        SetSize();
     }
     IEnumerator SetBackgroundSize()
     {

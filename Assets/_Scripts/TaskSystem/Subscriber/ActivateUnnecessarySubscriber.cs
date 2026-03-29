@@ -20,6 +20,7 @@ namespace TaskSystem.Subscriber
             public Listener(int taskID) => _taskID = taskID;
             protected override void OnEvent(in ActivateUnnecessaryEvent gameEvent)
             {
+
                 if (!TaskManager.Instance.CanActivateUnnecessaryTask()) return;
                 TaskManager.Instance.Lock();
                 UIController.Instance.SetDetailedMessage(TaskLoader.Instance.GetTaskData(_taskID).text);
