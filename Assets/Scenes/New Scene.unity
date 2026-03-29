@@ -3541,7 +3541,7 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4053647560275197314, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
   m_PrefabInstance: {fileID: 7550724605372647375}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1238711214
+--- !u!114 &1238711212
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3550,14 +3550,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1238711208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
+  m_Script: {fileID: 11500000, guid: 7b9d8fe1c8ef17148b6d6a2b7983e858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slider: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
+  buttonClickPrefab: {fileID: 1841088010465708254, guid: 1ce4ad3c7181abc469a28e101085afbf, type: 3}
+  panelRect: {fileID: 1238711211}
+  spawnCount: 10
+  squareSize: 200
+  minDistance: 210
   startTime: 0.25
-  panel: {fileID: 1238711211}
-  targetText: {fileID: 2505873300874954934, guid: a535d634aaa35e548af25a707d0b371e, type: 3}
-  inputField: {fileID: 5225337250521027534, guid: 79fd4d3677bc393428f7f3e06c5bac5f, type: 3}
 --- !u!1 &1265650695
 GameObject:
   m_ObjectHideFlags: 0
@@ -5773,7 +5775,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6669225541979902162, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1238711214}
+      addedObject: {fileID: 1238711212}
   m_SourcePrefab: {fileID: 100100000, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
