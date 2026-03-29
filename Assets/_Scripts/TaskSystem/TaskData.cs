@@ -32,8 +32,6 @@ namespace TaskSystem
         public float Score;
         [LabelText("任务难度")]
         public TaskDifficulty TaskDifficulty= TaskDifficulty.简单;
-        [LabelText("耗电速率")]
-        public float PowerConsumptionRate=0;
         [LabelText("任务接取对话"), TextArea]
         public List<string> text;
     }

@@ -29,7 +29,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|TaskSystem.Subscriber.StartLabReportSubscriber, Assembly-CSharp
+      Data: 1|TaskSystem.Subscriber.ActivateNecessarySubscriber, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -61,3 +61,5 @@ MonoBehaviour:
   Description: "\u4EFB\u52A1\u5185\u5BB9\uFF1AWord\u6525\u5199\u5B9E\u9A8C\u62A5\u544A"
   IsNecessary: 1
   Score: 500
+  TaskDifficulty: 0
+  text: []

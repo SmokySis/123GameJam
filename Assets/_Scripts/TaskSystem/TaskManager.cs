@@ -34,6 +34,7 @@ namespace TaskSystem
         private readonly List<int> _pendingFailTasks = new();
         private readonly TaskEventCenter _taskEventCenter = new();
         private bool _isInitialized;
+        private bool _activateLock;
         protected override bool _isDonDestroyOnLoad => true;
         public TaskEventCenter TaskEventCenter => _taskEventCenter;
         public bool IsInitialized => _isInitialized;
@@ -155,6 +156,11 @@ namespace TaskSystem
                 return _activeNecessaryTasks.Count < _maxNecessaryCount;
             return _activeUnnecessaryTasks.Count < _maxUnnecessaryCount;
         }
+        public bool CanActivateNecessaryTask()=> _activeNecessaryTasks.Count < _maxNecessaryCount&&!_activateLock;
+        public bool CanActivateUnnecessaryTask() => _activeNecessaryTasks.Count < _maxUnnecessaryCount && !_activateLock;
+        public bool Lock() => _activateLock = true;
+        public bool EndLock() => _activateLock = false;
+
         private bool ActivateTask(int taskID)
         {
             if (!_idToTask.TryGetValue(taskID, out Task task))
