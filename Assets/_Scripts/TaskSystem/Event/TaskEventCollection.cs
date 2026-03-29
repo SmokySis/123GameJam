@@ -3,6 +3,7 @@ using EventSystem;
 namespace TaskSystem.Event
 {
     public readonly struct FrameUpdateEvent : IGameEvent { }
+    public readonly struct Frame3UpdateEvent : IGameEvent { }
     public readonly struct ActivateNecessaryEvent : IGameEvent { }
     public readonly struct ActivateUnnecessaryEvent : IGameEvent { }
     public readonly struct FirstTaskEvent : IGameEvent { }

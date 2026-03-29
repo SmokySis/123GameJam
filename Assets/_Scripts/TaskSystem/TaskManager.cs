@@ -2,6 +2,7 @@ using DG.Tweening;
 using PoolSystem;
 using Sirenix.OdinInspector;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,9 +13,9 @@ namespace TaskSystem
     public class TaskManager : Singleton<TaskManager>
     {
         [SerializeField, LabelText("最大同时可存在的必要任务")]
-        private int _maxNecessaryCount = 3;
+        private int _maxNecessaryCount = 6;
         [SerializeField, LabelText("最大同时可存在的可选任务")]
-        private int _maxUnnecessaryCount = 5;
+        private int _maxUnnecessaryCount = 0;
         [SerializeField, LabelText("必要任务信息栏父对象")]
         private Transform _necessaryParent;
         [SerializeField, LabelText("可选任务信息栏父对象")]
@@ -156,10 +157,17 @@ namespace TaskSystem
                 return _activeNecessaryTasks.Count < _maxNecessaryCount;
             return _activeUnnecessaryTasks.Count < _maxUnnecessaryCount;
         }
-        public bool CanActivateNecessaryTask()=> _activeNecessaryTasks.Count < _maxNecessaryCount&&!_activateLock;
+        public bool CanActivateNecessaryTask() => _activeNecessaryTasks.Count < _maxNecessaryCount && !_activateLock;
         public bool CanActivateUnnecessaryTask() => _activeNecessaryTasks.Count < _maxUnnecessaryCount && !_activateLock;
         public bool Lock() => _activateLock = true;
         public bool EndLock() => _activateLock = false;
+        public void EndLock(int second) => StartCoroutine(EndLoakCo(second));
+        private IEnumerator EndLoakCo(int second)
+        {
+            yield return new WaitForSeconds(second);
+            EndLock();
+            yield return null;
+        }
 
         private bool ActivateTask(int taskID)
         {
