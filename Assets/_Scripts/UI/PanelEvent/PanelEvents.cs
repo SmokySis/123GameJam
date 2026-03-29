@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public abstract class IPanelClickEvents : MonoBehaviour, IPointerClickHandler
+public abstract class PanelClickEvents : MonoBehaviour, IPointerClickHandler
 {
+    protected UIController controller;
     public void OnPointerClick(PointerEventData eventData)
     {
         switch (eventData.button)

@@ -52,11 +52,14 @@ public class UIController : Singleton<UIController>
     [HideInInspector]public bool isAudioOpen = false;
     [Header("协程")]
     Coroutine MessageCoroutine;
+    Coroutine DialogueCoroutine;
     [Header("消息弹窗_")]
     [SerializeField] Text MessageText;
     [SerializeField] Vector2 UIPostion;
+    [SerializeField] Vector2 InitPosition;
     [SerializeField] float slideInSpeed = 200;
     [SerializeField] float stayTime = 3;
+    [SerializeField] float detailShowInterval = 1;
     [SerializeField] GameObject MessageButtonPrefab;
     [SerializeField] GameObject TextContainerPrefab;
     List<string> detailedMessages;
@@ -74,6 +77,8 @@ public class UIController : Singleton<UIController>
         masterSlider.onValueChanged.AddListener(OnMasterSliderValueChanged);
         bgmSlider.onValueChanged.AddListener(OnBGMSliderValueChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
+
+        StartCoroutine(MessagePanelCoroutine("Testing"));
     }
 
     private void Update()
@@ -192,22 +197,23 @@ public class UIController : Singleton<UIController>
         RectTransform rect = MessagePanel.GetComponent<RectTransform>();
         MessageText.text = message;
         rect.gameObject.SetActive(true);
-        if (rect.anchoredPosition.x > UIPostion.x)
+        while (rect.anchoredPosition.x > UIPostion.x)
         {
-            rect.anchoredPosition -= new Vector2(slideInSpeed * Time.deltaTime, 0);
+            Debug.Log("Sliding");
+            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x - slideInSpeed * Time.deltaTime, rect.anchoredPosition.y);
             if (rect.anchoredPosition.x < UIPostion.x) rect.anchoredPosition = UIPostion;
             yield return null;
         }
 
         yield return new WaitForSeconds(stayTime);
 
-        if (rect.anchoredPosition.x < UIPostion.x)
+        while (rect.anchoredPosition.x < InitPosition.x)
         {
-            rect.anchoredPosition += new Vector2(slideInSpeed * Time.deltaTime, 0);
-            if (rect.anchoredPosition.x > UIPostion.x) rect.anchoredPosition = UIPostion;
+            rect.anchoredPosition = new Vector2(rect.anchoredPosition.x + slideInSpeed * Time.deltaTime, rect.anchoredPosition.y);
+            if (rect.anchoredPosition.x > InitPosition.x) rect.anchoredPosition = InitPosition;
             yield return null;
         }
-        rect.gameObject.SetActive(false);
+        ResetMessagePanel();
     }
     public void GetMessage(string message)
     {
@@ -222,8 +228,24 @@ public class UIController : Singleton<UIController>
             GameObject container = poolCenter.GetInstance(TextContainerPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
             messageContainers.Add(container.GetComponent<Text>());
             container.GetComponent<Text>().text = detailedMessages[i];
+            container.SetActive(false);
         }
     }
+
+    IEnumerator ShowDialogueCoroutine()
+    {
+        for (int i = 0;i < detailedMessages.Count;i++)
+        {
+            messageContainers[i].gameObject.SetActive(true);
+            yield return new WaitForSeconds(detailShowInterval);
+        }
+    }
+
+    public void StartShowDialogue()
+    {
+
+    }
+
     public void ReleaseDetailedPanel()
     {
         for (int i = detailedMessages.Count - 1; i >= 0 ;i--)
@@ -245,4 +267,12 @@ public class UIController : Singleton<UIController>
         button.GetComponent<Button>().onClick.RemoveAllListeners();
         poolCenter.Release(button);
     }
+
+    public void StopMessageCoroutine()
+    {
+        if (MessageCoroutine != null) { StopCoroutine(MessageCoroutine); MessageCoroutine = null; }
+        else return;
+    }
+
+    public void ResetMessagePanel() { MessagePanel.GetComponent<RectTransform>().anchoredPosition = InitPosition; MessagePanel.SetActive(false); }
 }
