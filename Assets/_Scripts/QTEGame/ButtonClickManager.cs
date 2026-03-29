@@ -30,7 +30,16 @@ public class ButtonClickManager : MonoBehaviour
     bool isGet;
     bool isStart = false;
     bool isGenerate = false;
-    public float startTime = 0.25f;   
+    public float startTime = 0.25f;
+    private void OnEnable()
+    {
+        isStart = false;
+        isGet = false;
+        isGenerate = false;
+        spawnPoints = new List<Vector2>();
+        sliderClone = null;
+        progressBar = null;        
+    }
     private void Update()
     {
         if (sliderClone == null)

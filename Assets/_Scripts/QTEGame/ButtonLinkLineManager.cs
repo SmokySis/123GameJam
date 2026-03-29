@@ -39,10 +39,22 @@ public class ButtonLinkLineManager : MonoBehaviour
     public int spawnCount = 9;
     public float squareSize = 200f;
     public float minDistance = 210f;
-    private List<Vector2> spawnPoints = new List<Vector2>();
+    private List<Vector2> spawnPoints;
     private bool isGenerate = false;
 
     private EndSecondQTEEvent endSecondQTEEvent;
+    private void OnEnable()
+    {
+        isStart = false;
+        isGet = false;
+        isGenerate = false;
+        spawnPoints = new List<Vector2>();
+        sliderClone = null;
+        progressBar = null;
+        buttonLinkLineScript = null;
+        linkLine = null;
+    }
+   
     private void Update()
     {
         if (sliderClone == null)

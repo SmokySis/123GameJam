@@ -5,6 +5,7 @@ using TaskSystem;
 using TaskSystem.Event;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class TypingManager : MonoBehaviour
 {
@@ -29,6 +30,18 @@ public class TypingManager : MonoBehaviour
     private GameObject text;
     private GameObject field;
     private EndThirdQTEEvent endThirdQTEEvent;
+    private void OnEnable()
+    {
+        isStart = false;
+        isGet = false;
+        typing = null;
+        sliderClone = null;
+        progressBar = null;
+        targetText = null;
+        inputField = null;
+        text = null;
+        field = null;
+    }
     private void Update()
     {
         if (sliderClone == null)
