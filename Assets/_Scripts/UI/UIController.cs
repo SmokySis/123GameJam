@@ -1,5 +1,6 @@
 using AudioSystem;
 using PoolSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -208,7 +209,6 @@ public class UIController : Singleton<UIController>
         }
         rect.gameObject.SetActive(false);
     }
-
     public void GetMessage(string message)
     {
         MessageCoroutine = StartCoroutine(MessagePanelCoroutine(message));
@@ -224,13 +224,25 @@ public class UIController : Singleton<UIController>
             container.GetComponent<Text>().text = detailedMessages[i];
         }
     }
-
-    void ReleaseDetailedPanel()
+    public void ReleaseDetailedPanel()
     {
         for (int i = detailedMessages.Count - 1; i >= 0 ;i--)
         {
             poolCenter.Release(messageContainers[i].gameObject);
         }
         messageContainers.Clear();
+    }
+
+    public void SetMissionButton(Action action)
+    {
+        GameObject buttonObject = poolCenter.GetInstance(MessageButtonPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
+        Button button = buttonObject.GetComponent<Button>() ? buttonObject.GetComponent<Button>() : buttonObject.AddComponent<Button>();
+        button.onClick.AddListener(() => { action?.Invoke(); } );
+    }
+
+    public void ReleaseMissionButton(GameObject button)
+    {
+        button.GetComponent<Button>().onClick.RemoveAllListeners();
+        poolCenter.Release(button);
     }
 }
