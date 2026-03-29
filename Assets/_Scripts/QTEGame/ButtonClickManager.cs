@@ -11,7 +11,7 @@ public class ButtonClickManager : MonoBehaviour
     private ProgressBar progressBar;
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//承载的panel
-                                   //
+                                   
     public int difficulty;//难度系数
     [Header("三种难度加的数值")]
     public float dif0 = 0.1f;
@@ -38,6 +38,7 @@ public class ButtonClickManager : MonoBehaviour
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
+            difficulty = progressBar.difficulty;
             isGet = true;
         }
         if (progressBar == null)

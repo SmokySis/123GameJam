@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector.Editor.GettingStarted;
 using System.Collections;
 using System.Collections.Generic;
 using TaskSystem;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 public class TypingManager : MonoBehaviour
 {
-    public int diffculty;//传入的难度系数
+    public int difficulty;//传入的难度系数
     [Header("三种难度加的数值")]
     public float dif0 = 0f;
     public float dif1 = 0f;
@@ -35,6 +36,7 @@ public class TypingManager : MonoBehaviour
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
+            difficulty = progressBar.difficulty;
             isGet = true;
         }
 
@@ -49,11 +51,11 @@ public class TypingManager : MonoBehaviour
             text = Instantiate(targetText, panel);
             field = Instantiate(inputField, panel);
             typing = field.GetComponent<Typing>();
-            text.GetComponent<TextGeneration>().difficulty = this.diffculty;
+            text.GetComponent<TextGeneration>().difficulty = this.difficulty;
         }
         if (field != null && typing.isEqual)
         {
-            Score(diffculty);
+            Score(difficulty);
             Destroy(field);
             Destroy(text);
             TaskManager.Instance.TaskEventCenter.RaiseRunning<EndThirdQTEEvent>(endThirdQTEEvent);

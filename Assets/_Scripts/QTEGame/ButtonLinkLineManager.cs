@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector.Editor.GettingStarted;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -49,6 +50,7 @@ public class ButtonLinkLineManager : MonoBehaviour
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
+            difficulty = progressBar.difficulty;
             isGet = true;
         }
         if (progressBar == null)
