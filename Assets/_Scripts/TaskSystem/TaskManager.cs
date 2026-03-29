@@ -265,6 +265,7 @@ namespace TaskSystem
                 textObj = GameObjectPoolCenter.Instance.GetInstance(_textPrefab, Vector3.zero, Quaternion.identity, parent: _necessaryParent, changeParent: true);
             else
                 textObj = GameObjectPoolCenter.Instance.GetInstance(_textPrefab, Vector3.zero, Quaternion.identity, parent: _unnecessaryParent, changeParent: true);
+            textObj.GetComponent<RectTransform>().localScale = Vector3.one;
             Text uiText = textObj.GetComponent<Text>();
             if (uiText == null)
             {

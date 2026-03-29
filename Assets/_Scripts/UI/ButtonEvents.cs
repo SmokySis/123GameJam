@@ -16,7 +16,7 @@ public class ButtonEvent : MonoBehaviour
     }
 
     [SerializeField]GameObject panel;
-    public void StartButtonOnclick() { panel.SetActive(true);  }
+    public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); }
     public void CloseButtonOnClick() => panel.SetActive(false);
     public void StartSettingButtonOnClick() => controller.SetPause();
     public void CloseSettingButtonOnClick() => controller.SetPlay();
@@ -25,6 +25,6 @@ public class ButtonEvent : MonoBehaviour
 
     public void BackToMainMenuOnClick()
     {
-        //TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); AudioManager.Instance.Play("au_test_ui001");
+        // AudioManager.Instance.Play("au_test_ui001");
     }
 }

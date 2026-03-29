@@ -1,6 +1,7 @@
 using EventSystem;
 using Sirenix.OdinInspector;
 using Sirenix.Serialization;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace TaskSystem
@@ -23,6 +24,7 @@ namespace TaskSystem
         public bool IsNecessary;
         [LabelText("基础分数")]
         public float Score;
-        
+        [LabelText("任务接取对话"), TextArea]
+        public List<string> text;
     }
 }
