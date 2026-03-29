@@ -1,5 +1,7 @@
 using AudioSystem;
+using PoolSystem;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +17,7 @@ public class UIController : Singleton<UIController>
     [Header("UI组件_疲劳度")]
     [SerializeField] public float tiringPercent = 0f;
     [SerializeField] Image tiringFillImage;
-    [Header("Audio接口")]
-    AudioMixerRouter mixer;
+
     [Header("UI组件_音量")]
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider bgmSlider;
@@ -24,6 +25,16 @@ public class UIController : Singleton<UIController>
     [SerializeField] TextMeshProUGUI masterText;
     [SerializeField] TextMeshProUGUI bgmText;
     [SerializeField] TextMeshProUGUI sfxText;
+    [Header("设置面板")]
+    public GameObject SettingPanel;
+    public GameObject AudioPanel;
+    public GameObject MessagePanel;
+    public GameObject DetailPanel;
+    public GameObject DetailedTextPanel;
+    [Header("Audio接口")]
+    AudioMixerRouter mixer;
+    [Header("Pool实例")]
+    GameObjectPoolCenter poolCenter;
     [Header("音量大小")]
     float masterVolume = 1;
     float bgmVolume = 1;
@@ -38,13 +49,22 @@ public class UIController : Singleton<UIController>
     [Header("UI状态")]
     [HideInInspector]public bool isPaused = false;
     [HideInInspector]public bool isAudioOpen = false;
-    [Header("设置面板")]
-    public GameObject SettingPanel;
-    public GameObject AudioPanel;
+    [Header("协程")]
+    Coroutine MessageCoroutine;
+    [Header("消息弹窗_")]
+    [SerializeField] Text MessageText;
+    [SerializeField] Vector2 UIPostion;
+    [SerializeField] float slideInSpeed = 200;
+    [SerializeField] float stayTime = 3;
+    [SerializeField] GameObject MessageButtonPrefab;
+    [SerializeField] GameObject TextContainerPrefab;
+    List<string> detailedMessages;
+    List<Text> messageContainers = new List<Text>();
 
     private void Awake()
     {
         base.Awake();
+        poolCenter = GameObjectPoolCenter.Instance;
         mixer = AudioManager.Instance.Router;
     }
     void Start()
@@ -164,5 +184,53 @@ public class UIController : Singleton<UIController>
         masterSlider.value = masterVolume;
         bgmSlider.value = bgmVolume;
         sfxSlider.value = sfxVolume;
+    }
+
+    IEnumerator MessagePanelCoroutine(string message)
+    {
+        RectTransform rect = MessagePanel.GetComponent<RectTransform>();
+        MessageText.text = message;
+        rect.gameObject.SetActive(true);
+        if (rect.anchoredPosition.x > UIPostion.x)
+        {
+            rect.anchoredPosition -= new Vector2(slideInSpeed * Time.deltaTime, 0);
+            if (rect.anchoredPosition.x < UIPostion.x) rect.anchoredPosition = UIPostion;
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(stayTime);
+
+        if (rect.anchoredPosition.x < UIPostion.x)
+        {
+            rect.anchoredPosition += new Vector2(slideInSpeed * Time.deltaTime, 0);
+            if (rect.anchoredPosition.x > UIPostion.x) rect.anchoredPosition = UIPostion;
+            yield return null;
+        }
+        rect.gameObject.SetActive(false);
+    }
+
+    public void GetMessage(string message)
+    {
+        MessageCoroutine = StartCoroutine(MessagePanelCoroutine(message));
+    }
+
+    public void SetDetailedMessage(List<string> messages)
+    {
+        detailedMessages = messages;
+        for (int i = 0; i < detailedMessages.Count; i++)
+        {
+            GameObject container = poolCenter.GetInstance(TextContainerPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
+            messageContainers.Add(container.GetComponent<Text>());
+            container.GetComponent<Text>().text = detailedMessages[i];
+        }
+    }
+
+    void ReleaseDetailedPanel()
+    {
+        for (int i = detailedMessages.Count - 1; i >= 0 ;i--)
+        {
+            poolCenter.Release(messageContainers[i].gameObject);
+        }
+        messageContainers.Clear();
     }
 }
