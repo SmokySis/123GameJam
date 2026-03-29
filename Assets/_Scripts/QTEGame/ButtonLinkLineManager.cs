@@ -66,7 +66,7 @@ public class ButtonLinkLineManager : MonoBehaviour
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
-            difficulty = progressBar.difficulty;
+            diffculty = progressBar.difficulty;
             isGet = true;
         }
         if (progressBar == null)
