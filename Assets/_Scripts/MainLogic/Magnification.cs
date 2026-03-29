@@ -102,7 +102,7 @@ public class MagnificationSystem : MonoBehaviour
     }
 
     /// <summary>
-    /// 外部获取当前倍率（你其他脚本直接调用这个）
+    /// 外部获取当前倍率
     /// </summary>
     public float GetCurrentMagnification()
     {
