@@ -18,6 +18,11 @@ public class ButtonClickManager : MonoBehaviour
     public float dif1 = 0.05f;
     public float dif2 = 0.02f;
 
+    [Header("三种难度速度变化")]
+    public float speed0 = 0f;
+    public float speed1 = 0f;
+    public float speed2 = 0f;
+
     public int spawnCount = 10;
     public float squareSize = 200f;    
     public float minDistance = 210f;
@@ -91,9 +96,12 @@ public class ButtonClickManager : MonoBehaviour
         {
             GameObject square = Instantiate(buttonClickPrefab, panelRect);
             square.GetComponent<ButtonClick>().diffculty = this.difficulty;//设置难度
-            square.GetComponent<ButtonClick>().dif0 = this.dif0;//设置难度
-            square.GetComponent<ButtonClick>().dif1 = this.dif1;//设置难度
-            square.GetComponent<ButtonClick>().dif2 = this.dif2;//设置难度
+            square.GetComponent<ButtonClick>().dif0 = this.dif0;
+            square.GetComponent<ButtonClick>().dif1 = this.dif1;
+            square.GetComponent<ButtonClick>().dif2 = this.dif2;
+            square.GetComponent<ButtonClick>().speed0 = this.speed0;
+            square.GetComponent<ButtonClick>().speed1 = this.speed1;
+            square.GetComponent<ButtonClick>().speed2 = this.speed2;
 
 
             RectTransform squareRect = square.GetComponent<RectTransform>();

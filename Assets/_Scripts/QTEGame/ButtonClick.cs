@@ -12,6 +12,11 @@ public class ButtonClick : MonoBehaviour
     public float dif1 = 0f;
     public float dif2 = 0f;
 
+    private float speed = 0f;
+    [Header("三种难度速度变化")]
+    public float speed0 = 0f;
+    public float speed1 = 0f;
+    public float speed2 = 0f;
     public Animator anim;
     public Button button;
     public Image image;
@@ -25,12 +30,24 @@ public class ButtonClick : MonoBehaviour
         isClicked = false;
         image.transform.localScale = Vector3.zero;//初始将判定部分置零
         buttonScale = button.transform.localScale;
+        switch (diffculty)
+        {
+            case 0:
+                speed = speed0;
+                break;
+            case 1:
+                speed = speed1;
+                break;
+            case 2:
+                speed = speed2;
+                break;
+        }
     }
     private void Update()
     {
         if (isEnd == false)
         {
-            image.transform.localScale += Vector3.one * 0.002f * Time.timeScale;//判定部分随时间增大       
+            image.transform.localScale += Vector3.one * speed * Time.timeScale;//判定部分随时间增大       
         }
         imageScale = image.transform.localScale;     
         if (image.transform.localScale.x - Vector3.one.x * 1.2f > 0)
