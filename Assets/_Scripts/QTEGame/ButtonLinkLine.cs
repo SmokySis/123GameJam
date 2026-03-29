@@ -35,7 +35,11 @@ public class ButtonLinkLine : MonoBehaviour
         
     }
     void Update()
-    {
+    {      
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Check();
+        }   
         // 如果有正在跟随鼠标的线，并且还没点满
         if (currentFollowLine != null && clickList.Count < maxClickCount)
         {

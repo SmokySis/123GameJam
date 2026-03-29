@@ -15,6 +15,13 @@ public class Typing : MonoBehaviour
         targetText = GameObject.FindWithTag("Template").GetComponent<Text>();
 
     }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            Check();
+        }
+    }
     public void Check()
     {
         if (myText != null)

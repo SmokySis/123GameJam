@@ -356,6 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myText: {fileID: 135451166406390971}
   targetText: {fileID: 0}
+  isEqual: 0
 --- !u!1 &5406069641962248068
 GameObject:
   m_ObjectHideFlags: 0
