@@ -3,6 +3,7 @@ using PoolSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,6 +65,7 @@ public class UIController : Singleton<UIController>
     [SerializeField] GameObject TextContainerPrefab;
     List<string> detailedMessages;
     List<TextContainer> messageContainers = new List<TextContainer>();
+    GameObject CurrentMissionButton;
 
     private void Awake()
     {
@@ -227,20 +229,24 @@ public class UIController : Singleton<UIController>
             GameObject container = poolCenter.GetInstance(TextContainerPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
             messageContainers.Add(container.GetComponent<TextContainer>());
             container.GetComponent<TextContainer>().dialogueText.text = detailedMessages[i];
-            container.GetComponent<TextContainer>().SetSize();
+            container.GetComponent<RectTransform>().localScale = Vector3.one;
             container.SetActive(false);
         }
     }
 
     IEnumerator ShowDialogueCoroutine()
     {
+        Debug.Log("ShowDialoge");
         if (detailedMessages == null) yield break;
 
         for (int i = 0;i < detailedMessages.Count;i++)
         {
             messageContainers[i].gameObject.SetActive(true);
+            messageContainers[i].SetSize();
             yield return new WaitForSeconds(detailShowInterval);
         }
+
+        if (CurrentMissionButton != null) CurrentMissionButton.SetActive(true);
     }
 
     public void StartShowDialogue()
@@ -261,13 +267,16 @@ public class UIController : Singleton<UIController>
     {
         GameObject buttonObject = poolCenter.GetInstance(MessageButtonPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
         Button button = buttonObject.GetComponent<Button>() ? buttonObject.GetComponent<Button>() : buttonObject.AddComponent<Button>();
+        button.GetComponent<RectTransform>().localScale = Vector3.one;
         button.onClick.AddListener(() => { action?.Invoke(); } );
+        CurrentMissionButton = buttonObject;
+        CurrentMissionButton.SetActive(false);
     }
 
-    public void ReleaseMissionButton(GameObject button)
+    public void ReleaseMissionButton()
     {
-        button.GetComponent<Button>().onClick.RemoveAllListeners();
-        poolCenter.Release(button);
+        CurrentMissionButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        poolCenter.Release(CurrentMissionButton);
     }
 
     public void StopMessageCoroutine()
