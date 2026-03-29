@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TaskSystem;
 using TaskSystem.Event;
+using TaskSystem.Subscriber;
 
 public class ProgressBar : MonoBehaviour
 {    
@@ -11,10 +12,12 @@ public class ProgressBar : MonoBehaviour
         QTEDrive,         // QTE驱动（不按不动）
         QTEOptional       // QTE选做
     }
-    public Slider slider;          
+    public Slider slider;
+    public int id;
     public float totalTime = 100f;      
-    public bool autoStart = true;  
-    
+    public bool autoStart = true;
+    public SliderCreating sc;
+
     public BarMode barMode;
     public int difficulty;//难度
    
@@ -26,7 +29,7 @@ public class ProgressBar : MonoBehaviour
     public float currentProgress;
     private bool isRunning;
 
-    private EndProgressBarEvent endProgressBarEvent;
+    
 
     void Awake()
     {
@@ -68,7 +71,21 @@ public class ProgressBar : MonoBehaviour
         if (currentProgress >= 1)
         {
             OnBarComplete();
-            TaskManager.Instance.TaskEventCenter.RaiseRunning<EndProgressBarEvent>(endProgressBarEvent);//对吗
+            switch (id % 1000)
+            {               
+                case 1:
+                    TaskManager.Instance.TaskEventCenter.RaiseRunning(new End1Event() {ID=id });
+                    break;
+                case 2:
+                    TaskManager.Instance.TaskEventCenter.RaiseRunning(new End2Event() { ID = id });
+                    break;
+                case 3:
+                    TaskManager.Instance.TaskEventCenter.RaiseRunning(new End3Event() { ID = id });
+                    break;              
+               
+            }
+            sc.taskID++;
+            //Debug.Log(sc.taskID);
         }
     }
 

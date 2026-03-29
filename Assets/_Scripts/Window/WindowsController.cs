@@ -69,6 +69,10 @@ public class WindowsController : Singleton<WindowsController>
         }
         _powerRate = Mathf.Max(newRate - 0.15f, 1);
     }
+    private void Limit()
+    {
+
+    }
     private void Consume()
     {
         UIController.Instance.batteryPowerPercent -= 0.01f * _powerConsume;
