@@ -6,6 +6,12 @@ using UnityEngine;
 
 namespace TaskSystem
 {
+    public enum TaskDifficulty
+    {
+        简单=0,
+        中等=1,
+        困难=2
+    }
     [CreateAssetMenu(menuName = "Task/TaskData", fileName = "TaskData")]
     public class TaskData : SerializedScriptableObject
     {
@@ -24,6 +30,10 @@ namespace TaskSystem
         public bool IsNecessary;
         [LabelText("基础分数")]
         public float Score;
+        [LabelText("任务难度")]
+        public TaskDifficulty TaskDifficulty= TaskDifficulty.简单;
+        [LabelText("耗电速率")]
+        public float PowerConsumptionRate=0;
         [LabelText("任务接取对话"), TextArea]
         public List<string> text;
     }

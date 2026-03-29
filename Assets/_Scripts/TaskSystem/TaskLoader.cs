@@ -10,6 +10,12 @@ namespace TaskSystem
         protected override bool _isDonDestroyOnLoad => true;
         public IReadOnlyDictionary<int, TaskData> AllTaskData => _datas;
         protected override void Awake() => base.Awake();
+        public TaskData GetTaskData(int taskID)
+        {
+            if (_datas.ContainsKey(taskID))
+                return _datas[taskID];
+            return null;
+        }
         public void LoadAllTaskData()
         {
             if (_datas != null) return;

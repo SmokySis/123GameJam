@@ -12,13 +12,17 @@ namespace TaskSystem.Subscriber
         {
             yield return new Listener(taskID);
         }
-        public IEventSubscriber DeepCopy()=> new FirstTaskSubscriber();
+        public IEventSubscriber DeepCopy() => new FirstTaskSubscriber();
         [Serializable]
         private sealed class Listener : EventListener<FirstTaskEvent>
         {
             private readonly int _taskID;
-            public Listener(int taskID)=> _taskID = taskID;
-            protected override void OnEvent(in FirstTaskEvent gameEvent) => TaskManager.Instance.RequestActivateTask(_taskID);
+            public Listener(int taskID) => _taskID = taskID;
+            protected override void OnEvent(in FirstTaskEvent gameEvent)
+            {
+                UIController.Instance.SetDetailedMessage(TaskLoader.Instance.GetTaskData(_taskID).text);
+                UIController.Instance.SetMissionButton(() =>TaskManager.Instance.RequestActivateTask(_taskID));
+            }
         }
     }
 }
