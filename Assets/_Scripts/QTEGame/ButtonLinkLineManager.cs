@@ -1,10 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TaskSystem;
+using TaskSystem.Event;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ButtonLinkLineManager : MonoBehaviour
 {
+
+    public int diffculty;//传入的难度系数
+    [Header("三种难度加的数值")]
+    public float dif0 = 0f;
+    public float dif1 = 0f;
+    public float dif2 = 0f;
+
     private GameObject sliderClone;
     private ProgressBar progressBar;
     private bool isStart = false;
@@ -12,6 +23,8 @@ public class ButtonLinkLineManager : MonoBehaviour
     public float startTime = 0.25f;   
 
     public RectTransform panel;
+
+
 
     [Header("预制件")]
     public GameObject buttonLinkLine;
@@ -26,7 +39,9 @@ public class ButtonLinkLineManager : MonoBehaviour
     public float squareSize = 200f;
     public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
-    private bool isGenerate = false;    
+    private bool isGenerate = false;
+
+    private EndSecondQTEEvent endSecondQTEEvent;
     private void Update()
     {
         if (sliderClone == null)
@@ -38,6 +53,22 @@ public class ButtonLinkLineManager : MonoBehaviour
         }
         if (progressBar == null)
             return;
+
+        switch (diffculty)
+        {
+            case 0:
+                spawnCount = 4;
+                break;
+            case 1:
+                spawnCount = 6;
+                break;
+            case 2:
+                spawnCount = 9;
+                break;
+            
+        }
+
+
         if (progressBar.GetProgress() > startTime && !isStart)
         {
             isStart = true;
@@ -55,16 +86,24 @@ public class ButtonLinkLineManager : MonoBehaviour
                         squareRect.anchoredPosition = spawnPoints[i];
                         squareRect.sizeDelta = new Vector2(squareSize, squareSize);
                     }               
+                }
+                for (int i = spawnCount; i < 9; i++)
+                {
+                    Destroy(buttonLinkLineScript.targetButtons[i].gameObject);
+                    buttonLinkLineScript.targetButtons[i] = null;
 
                 }
-                                   
+                buttonLinkLineScript.targetButtons = buttonLinkLineScript.targetButtons.Take(spawnCount).ToArray();//截断
+
             }
         }
 
         if (buttonLinkLineScript != null && buttonLinkLineScript.isCompleted)
-        {           
+        {
             //Destroy(templete);
+            Score(diffculty);
             Destroy(linkLine);
+            TaskManager.Instance.TaskEventCenter.RaiseRunning<EndSecondQTEEvent>(endSecondQTEEvent);
         }
     }
     void GenerateNonOverlappingPoints()
@@ -77,8 +116,8 @@ public class ButtonLinkLineManager : MonoBehaviour
         {
             // 生成 Panel 范围内的随机坐标
             Vector2 randomPos = new Vector2(
-                Random.Range(panel.rect.xMin + squareSize / 2, panel.rect.xMax - squareSize / 2),
-                Random.Range(panel.rect.yMin + squareSize / 2, panel.rect.yMax - squareSize / 2)
+                UnityEngine.Random.Range(panel.rect.xMin + squareSize / 2, panel.rect.xMax - squareSize / 2),
+                UnityEngine.Random.Range(panel.rect.yMin + squareSize / 2, panel.rect.yMax - squareSize / 2)
             );
 
             // 检查是否与已有点距离过近
@@ -100,5 +139,22 @@ public class ButtonLinkLineManager : MonoBehaviour
             }
         }
 
+    }
+    private void Score(int dif)
+    {
+        ProgressBar gameObject = GameObject.FindWithTag("Slider").gameObject.GetComponent<ProgressBar>();
+        switch (dif)
+        {
+            case 0:
+                gameObject.currentProgress += dif0;
+                break;
+            case 1:
+                gameObject.currentProgress += dif1;
+                break;
+            case 2:
+                gameObject.currentProgress += dif2;
+                break;
+
+        }
     }
 }

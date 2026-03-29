@@ -12,14 +12,18 @@ public class ProgressBar : MonoBehaviour
         QTEOptional       // QTE选做
     }
     public Slider slider;          
-    public float totalTime = 20f;      
+    public float totalTime = 100f;      
     public bool autoStart = true;  
     
     public BarMode barMode;
-
+    public int difficulty;//难度
+   
+    public float dif0 = 0f;
+    public float dif1 = 0f;
+    public float dif2 = 0f;
 
     // 当前进度
-    private float currentProgress;
+    public float currentProgress;
     private bool isRunning;
 
     private EndProgressBarEvent endProgressBarEvent;
@@ -45,14 +49,14 @@ public class ProgressBar : MonoBehaviour
         
         if (barMode == BarMode.AutoFill)
         {
-            currentProgress += Time.deltaTime / totalTime;
+            currentProgress += Time.deltaTime * AddProgress(difficulty);
         }       
-        else if (barMode == BarMode.QTEOptional)
-        {
-            currentProgress += Time.deltaTime / totalTime;
+        //else if (barMode == BarMode.QTEOptional)
+        //{
+        //    currentProgress += Time.deltaTime / totalTime;
 
             
-        }
+        //}
         else if (barMode == BarMode.QTEDrive)
         {
             
@@ -90,6 +94,20 @@ public class ProgressBar : MonoBehaviour
         
     }
 
+    private float AddProgress(int dif)
+    {        
+        switch (dif)
+        {
+            case 0:
+                return dif0;               
+            case 1:
+                return dif1;               
+            case 2:
+                return dif2;
+            default:
+                return 0f;
+        }
+    }
     //外部获取当前进度
     //可用于QTE弹出时机设置
     public float GetProgress()

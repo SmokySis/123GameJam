@@ -5,10 +5,19 @@ using UnityEngine.UI;
 
 public class ButtonClickManager : MonoBehaviour
 {
+
+
     private GameObject sliderClone;
     private ProgressBar progressBar;
     public GameObject buttonClickPrefab;
-    public RectTransform panelRect;//承载的panel   
+    public RectTransform panelRect;//承载的panel
+                                   //
+    public int difficulty;//难度系数
+    [Header("三种难度加的数值")]
+    public float dif0 = 0.1f;
+    public float dif1 = 0.05f;
+    public float dif2 = 0.02f;
+
     public int spawnCount = 10;
     public float squareSize = 200f;    
     public float minDistance = 210f;
@@ -81,6 +90,12 @@ public class ButtonClickManager : MonoBehaviour
         foreach (Vector2 pos in spawnPoints)
         {
             GameObject square = Instantiate(buttonClickPrefab, panelRect);
+            square.GetComponent<ButtonClick>().diffculty = this.difficulty;//设置难度
+            square.GetComponent<ButtonClick>().dif0 = this.dif0;//设置难度
+            square.GetComponent<ButtonClick>().dif1 = this.dif1;//设置难度
+            square.GetComponent<ButtonClick>().dif2 = this.dif2;//设置难度
+
+
             RectTransform squareRect = square.GetComponent<RectTransform>();
             if (squareRect != null)
             {

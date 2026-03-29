@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using TaskSystem;
+using TaskSystem.Event;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TypingManager : MonoBehaviour
 {
+    public int diffculty;//传入的难度系数
+    [Header("三种难度加的数值")]
+    public float dif0 = 0f;
+    public float dif1 = 0f;
+    public float dif2 = 0f;
 
     private GameObject sliderClone;
     private ProgressBar progressBar;
@@ -21,7 +27,7 @@ public class TypingManager : MonoBehaviour
 
     private GameObject text;
     private GameObject field;
-    
+    private EndThirdQTEEvent endThirdQTEEvent;
     private void Update()
     {
         if (sliderClone == null)
@@ -46,10 +52,28 @@ public class TypingManager : MonoBehaviour
         }
         if (field != null && typing.isEqual)
         {
+            Score(diffculty);
             Destroy(field);
             Destroy(text);
+            TaskManager.Instance.TaskEventCenter.RaiseRunning<EndThirdQTEEvent>(endThirdQTEEvent);
         }
         
     }
+    private void Score(int dif)
+    {
+        ProgressBar gameObject = GameObject.FindWithTag("Slider").gameObject.GetComponent<ProgressBar>();
+        switch (dif)
+        {
+            case 0:
+                gameObject.currentProgress += dif0;
+                break;
+            case 1:
+                gameObject.currentProgress += dif1;
+                break;
+            case 2:
+                gameObject.currentProgress += dif2;
+                break;
 
+        }
+    }
 }
