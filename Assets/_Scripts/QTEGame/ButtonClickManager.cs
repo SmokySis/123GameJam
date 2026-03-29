@@ -10,8 +10,8 @@ public class ButtonClickManager : MonoBehaviour
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//³ÐÔØµÄpanel   
     public int spawnCount = 10;
-    public float squareSize = 100f;    
-    public float minDistance = 110f;
+    public float squareSize = 200f;    
+    public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
     bool isStart = false;
     bool isGenerate = false;
