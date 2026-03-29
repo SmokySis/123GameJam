@@ -224,6 +224,54 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &588249305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 588249307}
+  - component: {fileID: 588249306}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &588249306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588249305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42add583f1b8fb84380721e7bfb616a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnification: 1
+  resetTime: 5
+  _targetSliders: []
+  _lastSliderValues: []
+--- !u!4 &588249307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588249305}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1024.4401, y: 459.36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1365485805
 GameObject:
   m_ObjectHideFlags: 0
@@ -432,7 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb82fd6c2dfc3a4ab5a8e3f883a85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffculty: 1
+  difficulty: 0
   dif0: 0.3
   dif1: 0
   dif2: 0
@@ -454,7 +502,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffculty: 2
+  difficulty: 0
   dif0: 1
   dif1: 1
   dif2: 1
@@ -482,6 +530,7 @@ MonoBehaviour:
   sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   panelRect: {fileID: 1414359001}
   taskID: 0
+  taskData: {fileID: 0}
 --- !u!1 &1860005570
 GameObject:
   m_ObjectHideFlags: 0
@@ -557,3 +606,4 @@ SceneRoots:
   - {fileID: 1365485808}
   - {fileID: 527035644}
   - {fileID: 1860005573}
+  - {fileID: 588249307}

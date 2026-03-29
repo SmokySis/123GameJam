@@ -54,7 +54,11 @@ public class ButtonLinkLineManager : MonoBehaviour
         buttonLinkLineScript = null;
         linkLine = null;
     }
-   
+    private void OnDisable()
+    {
+        Destroy(linkLine);
+    }
+
     private void Update()
     {
         if (sliderClone == null)

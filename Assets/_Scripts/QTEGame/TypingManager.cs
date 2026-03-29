@@ -42,6 +42,11 @@ public class TypingManager : MonoBehaviour
         text = null;
         field = null;
     }
+    private void OnDisable()
+    {
+        Destroy(field);
+        Destroy(text);
+    }
     private void Update()
     {
         if (sliderClone == null)

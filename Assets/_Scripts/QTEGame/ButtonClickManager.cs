@@ -40,6 +40,10 @@ public class ButtonClickManager : MonoBehaviour
         sliderClone = null;
         progressBar = null;        
     }
+    private void OnDisable()
+    {
+        
+    }
     private void Update()
     {
         if (sliderClone == null)
