@@ -26,7 +26,13 @@ MonoBehaviour:
       Data: 0|EventSystem.IEventSubscriber[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|TaskSystem.Subscriber.Start3Subscriber, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
@@ -35,19 +41,25 @@ MonoBehaviour:
       Data: 
     - Name: RuntimeSubscribers
       Entry: 7
-      Data: 1|EventSystem.IEventSubscriber[], Assembly-CSharp
+      Data: 2|EventSystem.IEventSubscriber[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 0
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 3|TaskSystem.Subscriber.End3Subscriber, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 13
       Data: 
     - Name: 
       Entry: 8
       Data: 
-  ID: 0
-  Description: 
-  IsNecessary: 0
-  Score: 0
-  TaskDifficulty: 0
+  ID: 3003
+  Description: "\u5236\u4F5C\u7B54\u8FA9PPT"
+  IsNecessary: 1
+  Score: 800
+  TaskDifficulty: 2
   text: []

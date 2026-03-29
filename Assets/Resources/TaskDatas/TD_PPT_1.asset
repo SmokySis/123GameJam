@@ -29,7 +29,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|TaskSystem.Subscriber.ActivateNecessarySubscriber, Assembly-CSharp
+      Data: 1|TaskSystem.Subscriber.FirstTaskSubscriber, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -47,7 +47,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 3|TaskSystem.Subscriber.MakePPTFinishSubscriber, Assembly-CSharp
+      Data: 3|TaskSystem.Subscriber.End1Subscriber, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -57,9 +57,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  ID: 3
-  Description: "\u6700\u521D\u7684\u5FC5\u505A\u4EFB\u52A1\u4E4B\u4E00\u3002\n\u4EFB\u52A1\u5185\u5BB9\uFF1A\u5236\u4F5C\u5C0F\u7EC4\u6C47\u62A5PPT"
+  ID: 3001
+  Description: "\u6574\u5408\u8BFE\u5802PPT"
   IsNecessary: 1
-  Score: 500
+  Score: 200
   TaskDifficulty: 0
   text: []

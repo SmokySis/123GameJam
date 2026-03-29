@@ -21,12 +21,13 @@ namespace TaskSystem.Subscriber
             public Listener(int taskID) => _taskID = taskID;
             protected override void OnEvent(in Frame3UpdateEvent gameEvent)
             {
+                Debug.Log(_taskID+"hear");
                 if (!WindowsController.Instance.OpenTask || !TaskManager.Instance.CanActivateNecessaryTask())
                     return;
                 Debug.Log(_taskID);
                 TaskManager.Instance.Lock();
                 TaskManager.Instance.RequestActivateTask(_taskID);
-                TaskManager.Instance.EndLock(1);
+                TaskManager.Instance.EndLock(3);
             }
         }
     }

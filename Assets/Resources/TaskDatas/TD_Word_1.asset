@@ -29,7 +29,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|TaskSystem.Subscriber.ActivateNecessarySubscriber, Assembly-CSharp
+      Data: 1|TaskSystem.Subscriber.FirstTaskSubscriber, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -47,7 +47,7 @@ MonoBehaviour:
       Data: 1
     - Name: 
       Entry: 7
-      Data: 3|TaskSystem.Subscriber.MakeWordProposalFinishSubcriber, Assembly-CSharp
+      Data: 3|TaskSystem.Subscriber.End1Subscriber, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 
@@ -57,11 +57,9 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  ID: 1
-  Description: "\u6700\u521D\u7684\u5FC5\u505A\u4EFB\u52A1\u4E4B\u4E00\u3002\n\u4EFB\u52A1\u5185\u5BB9\uFF1A\u5B8C\u5584Word\u7B56\u5212\u6587\u6863"
+  ID: 6001
+  Description: "\u5199\u7B80\u5386\u6587\u6863"
   IsNecessary: 1
-  Score: 500
+  Score: 200
   TaskDifficulty: 0
-  text:
-  - 
-  - 
+  text: []
