@@ -5051,26 +5051,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4053647560275197314, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
   m_PrefabInstance: {fileID: 7550724605372647375}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1238711214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1238711208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  difficulty: 0
-  dif0: 0
-  dif1: 0
-  dif2: 0
-  startTime: 0.25
-  panel: {fileID: 1238711211}
-  targetText: {fileID: 2505873300874954934, guid: a535d634aaa35e548af25a707d0b371e, type: 3}
-  inputField: {fileID: 5225337250521027534, guid: 79fd4d3677bc393428f7f3e06c5bac5f, type: 3}
 --- !u!114 &1238711215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5093,6 +5073,49 @@ MonoBehaviour:
   TickTime: 0
   TiredTickTime: 0
   WindowState: 0
+--- !u!114 &1238711219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238711208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862d93be3c88c374fa53034984666d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdate: 0
+  difficulty: 0
+  dif0: 0.2
+  dif1: 0.1
+  dif2: 0.05
+  sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
+  panelRect: {fileID: 1238711211}
+  taskID: 1001
+  taskData: {fileID: 0}
+--- !u!114 &1238711220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1238711208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb82fd6c2dfc3a4ab5a8e3f883a85c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  difficulty: 0
+  dif0: 0
+  dif1: 0
+  dif2: 0
+  startTime: 0.25
+  panel: {fileID: 1238711211}
+  buttonLinkLine: {fileID: 2658207742418542512, guid: ecd3b71c6c11ed04986e5340e7065f71, type: 3}
+  spawnCount: 9
+  squareSize: 200
+  minDistance: 210
 --- !u!1 &1262042766
 GameObject:
   m_ObjectHideFlags: 0
@@ -5249,6 +5272,7 @@ GameObject:
   - component: {fileID: 1272370110}
   - component: {fileID: 1272370109}
   - component: {fileID: 1272370108}
+  - component: {fileID: 1272370111}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -5347,6 +5371,18 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!225 &1272370111
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1272370106}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1284761550
 GameObject:
   m_ObjectHideFlags: 0
@@ -8674,10 +8710,13 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6669225541979902162, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1238711214}
+      addedObject: {fileID: 1238711215}
     - targetCorrespondingSourceObject: {fileID: 6669225541979902162, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1238711215}
+      addedObject: {fileID: 1238711219}
+    - targetCorrespondingSourceObject: {fileID: 6669225541979902162, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1238711220}
   m_SourcePrefab: {fileID: 100100000, guid: fb2b39305ce2d5340a291040cb0b7616, type: 3}
 --- !u!114 &7550724605372647376 stripped
 MonoBehaviour:

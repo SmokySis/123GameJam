@@ -21,16 +21,21 @@ public class SliderCreating : MonoBehaviour
     private GameObject sliderClone;    
     private void OnEnable()
     {
-        //taskData = TaskLoader.Instance.GetTaskData(taskID);
-        //if (taskData != null )
-        //{
-        //    difficulty = (int)taskData.TaskDifficulty;
-        //}
+        taskData = TaskLoader.Instance.GetTaskData(taskID);
+        if (taskData!=null)
+        print("aaa");
+        if (taskData != null)
+        {
+            difficulty = (int)taskData.TaskDifficulty;
+        }
         sliderClone = Instantiate(sliderPrefab,panelRect);
         sliderClone.gameObject.SetActive(false);
-       
-        //if (TaskManager.Instance.IsTaskActive(taskID))
-        //{
+        sliderClone.GetComponent<ProgressBar>().id = taskID;
+        sliderClone.GetComponent<ProgressBar>().sc = this;
+
+        if (TaskManager.Instance.IsTaskActive(taskID))
+        {
+            print("1");
             sliderClone.gameObject.SetActive(true);
             sliderClone.GetComponent<ProgressBar>().barMode = (ProgressBar.BarMode)isUpdate;
             sliderClone.GetComponent<ProgressBar>().difficulty = this.difficulty;
@@ -38,7 +43,7 @@ public class SliderCreating : MonoBehaviour
             sliderClone.GetComponent<ProgressBar>().dif1 = this.dif1;
             sliderClone.GetComponent<ProgressBar>().dif2 = this.dif2;
 
-        //}
+        }
     }
     private void OnDisable()
     {

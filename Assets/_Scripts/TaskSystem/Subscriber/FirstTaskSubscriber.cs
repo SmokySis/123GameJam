@@ -25,9 +25,9 @@ namespace TaskSystem.Subscriber
                 if (!WindowsController.Instance.OpenTask || !TaskManager.Instance.CanActivateNecessaryTask())
                     return;
                 Debug.Log(_taskID);
-                TaskManager.Instance.Lock();
+                //TaskManager.Instance.Lock();
                 TaskManager.Instance.RequestActivateTask(_taskID);
-                TaskManager.Instance.EndLock(3);
+                //TaskManager.Instance.EndLock(3);
             }
         }
     }
