@@ -16,18 +16,18 @@ public class ButtonLinkLine : MonoBehaviour
 
     public List<Button> clickList = new List<Button>();
     private List<GameObject> lineList = new List<GameObject>();
-    private ButtonLinkLineTemplate template;
+    //private ButtonLinkLineTemplate template;
 
     private GameObject currentFollowLine; // 当前跟随鼠标的线
     private Button lastBtn;
 
-    public int[] buttons = new int[9];//这个数组用于接收模板的顺序索引
-    public int[] myButtons = new int[9];//这个数组用于计录点击连线的索引  
+    //public int[] buttons = new int[9];//这个数组用于接收模板的顺序索引
+    //public int[] myButtons = new int[9];//这个数组用于计录点击连线的索引  
     public bool isCompleted = false;
 
     void Start()
     {        
-        template = GameObject.FindWithTag("Template").GetComponent<ButtonLinkLineTemplate>();
+        //template = GameObject.FindWithTag("Template").GetComponent<ButtonLinkLineTemplate>();
         // 遍历所有按钮，给每个按钮添加点击事件
         for (int i = 0; i < targetButtons.Length; i++)
         {
@@ -162,28 +162,33 @@ public class ButtonLinkLine : MonoBehaviour
     /// </summary>
     public void Check()
     {
-        for (int i = 0; i < template.targetButtons.Count; i++)
-        {
-            int index = System.Array.IndexOf(template.buttons, template.targetButtons[i]);
-            buttons[i] = index;//接收顺序      
-        }
-        for (int i = 0; i < clickList.Count; i++)
-        {
-            int myIndex = System.Array.IndexOf(targetButtons, clickList[i]);
-            myButtons[i] = myIndex;//接收顺序
-        }
-        bool same = myButtons.SequenceEqual(buttons);
-        bool same2 = myButtons.SequenceEqual(buttons.Reverse());
+        //for (int i = 0; i < template.targetButtons.Count; i++)
+        //{
+        //    int index = System.Array.IndexOf(template.buttons, template.targetButtons[i]);
+        //    buttons[i] = index;//接收顺序      
+        //}
+        //for (int i = 0; i < clickList.Count; i++)
+        //{
+        //    int myIndex = System.Array.IndexOf(targetButtons, clickList[i]);
+        //    myButtons[i] = myIndex;//接收顺序
+        //}
+        //bool same = myButtons.SequenceEqual(buttons);
+        //bool same2 = myButtons.SequenceEqual(buttons.Reverse());
 
-        if (same || same2)
+        //if (same || same2)
+        //{
+        //    print("Good");
+        //}
+        //else
+        //{
+        //    print("Bad");
+        //}
+        if (clickList.Count == maxClickCount)
         {
+            isCompleted = true;
             print("Good");
+
         }
-        else
-        {
-            print("Bad");
-        }
-        isCompleted = same || same2;
     }  
     
 }
