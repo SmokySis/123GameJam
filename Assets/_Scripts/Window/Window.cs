@@ -35,14 +35,14 @@ public class Window : MonoBehaviour
         if (IconUI) IconUI.sprite = Icon;
         WindowState = transform.GetSiblingIndex() == 0 ? WindowState.Foreground : WindowState.Background;
     }
-    public float ConsumePower()
+    public float ConsumePower(float rate=1)
     {
         TickTime += Time.deltaTime;
         if (TickTime > 1)
             switch (WindowState)
             {
                 case WindowState.Foreground: TickTime = 0; return ForegroundDrain;
-                case WindowState.Background: TickTime = 0; return BackgroundDrain;
+                case WindowState.Background: TickTime = 0; return BackgroundDrain*rate;
             }
         return 0;
     }

@@ -12,6 +12,7 @@ public class WindowsController : Singleton<WindowsController>
     private List<Window> _windows;
     public Window ForegroundWindow { get; private set; }
     private float _powerConsume = 0;
+    private float _powerRate = 1;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,13 +40,16 @@ public class WindowsController : Singleton<WindowsController>
     }
     private void ConsumePower()
     {
+        float newRate = 1;
         foreach (Window window in _windows)
         {
             if (window.gameObject.activeSelf && window.isActiveAndEnabled)
             {
-                _powerConsume += window.ConsumePower();
+                _powerConsume += window.ConsumePower(_powerRate);
+                newRate += 0.15f;
             }
         }
+        _powerRate = Mathf.Max(newRate - 0.15f, 1);
     }
     private void DelPowerConsume()
     {
