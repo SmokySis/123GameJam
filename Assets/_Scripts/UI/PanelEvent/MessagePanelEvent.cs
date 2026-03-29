@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MessagePanelEvent : PanelClickEvents
 {
+    [SerializeField] GameObject _panel;
     private void Awake()
     {
         controller = UIController.Instance;
@@ -13,8 +14,9 @@ public class MessagePanelEvent : PanelClickEvents
         Debug.Log("OnClick");
         controller.StopMessageCoroutine();
         controller.ResetMessagePanel();
-        controller.DetailPanel.SetActive(true);
-        controller.StartShowDialogue();
+        _panel.SetActive(true);
+        //controller.DetailPanel.SetActive(true);
+        //controller.StartShowDialogue();
     }
 
     protected override void PanelOnClick_Right()
