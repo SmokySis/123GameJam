@@ -420,7 +420,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414359000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fb82fd6c2dfc3a4ab5a8e3f883a85c6, type: 3}
   m_Name: 
@@ -442,11 +442,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   startTime: 0.25
-  panel: {fileID: 0}
-  targetText: {fileID: 0}
-  inputField: {fileID: 0}
+  panel: {fileID: 1414359001}
+  targetText: {fileID: 2505873300874954934, guid: a535d634aaa35e548af25a707d0b371e, type: 3}
+  inputField: {fileID: 5225337250521027534, guid: 79fd4d3677bc393428f7f3e06c5bac5f, type: 3}
 --- !u!1 &1860005570
 GameObject:
   m_ObjectHideFlags: 0

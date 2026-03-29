@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TaskSystem;
+using TaskSystem.Event;
 
 public class ProgressBar : MonoBehaviour
 {    
@@ -21,6 +22,7 @@ public class ProgressBar : MonoBehaviour
     private float currentProgress;
     private bool isRunning;
 
+    private EndProgressBarEvent endProgressBarEvent;
 
     void Awake()
     {
@@ -62,6 +64,7 @@ public class ProgressBar : MonoBehaviour
         if (currentProgress >= 1)
         {
             OnBarComplete();
+            TaskManager.Instance.TaskEventCenter.RaiseRunning<EndProgressBarEvent>(endProgressBarEvent);//¶ÔÂğ
         }
     }
 

@@ -10,4 +10,8 @@ namespace TaskSystem.Event
     public readonly struct EndLabReportEvent : IGameEvent { }
     public readonly struct StartResumeEvent : IGameEvent { }
     public readonly struct EndResumeEvent : IGameEvent { }
+    public readonly struct EndFirstQTEEvent : IGameEvent { }
+    public readonly struct EndSecondQTEEvent : IGameEvent { }
+    public readonly struct EndThirdQTEEvent : IGameEvent { }
+    public readonly struct EndProgressBarEvent : IGameEvent { }
 }

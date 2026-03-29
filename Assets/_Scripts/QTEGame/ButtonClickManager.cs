@@ -84,5 +84,6 @@ public class ButtonClickManager : MonoBehaviour
             }
             yield return new WaitForSeconds(1f);
         }
+
     }
 }
