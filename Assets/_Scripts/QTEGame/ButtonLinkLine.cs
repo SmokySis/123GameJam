@@ -11,6 +11,7 @@ public class ButtonLinkLine : MonoBehaviour
     public Camera uiCamera;
 
 
+
     public Button[] targetButtons; //这个数组用于计录按钮 
     public int maxClickCount = 9;     // 最多点几个按钮（数组上限）
 

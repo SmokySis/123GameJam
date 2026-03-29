@@ -34,7 +34,7 @@ AnimatorController:
   m_Name: 1
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: IsClicked
+  - m_Name: IsEnd
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -115,7 +115,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsClicked
+    m_ConditionEvent: IsEnd
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 2749139403090547409}

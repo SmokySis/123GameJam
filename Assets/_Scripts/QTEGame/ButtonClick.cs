@@ -6,21 +6,29 @@ using UnityEngine.UI;
 
 public class ButtonClick : MonoBehaviour
 {
+    public int diffculty;//传入的难度系数
+    [Header("三种难度加的数值")]
+    public float dif0 = 0f;
+    public float dif1 = 0f;
+    public float dif2 = 0f;
+
     public Animator anim;
     public Button button;
     public Image image;
     public Vector3 buttonScale;
     public Vector3 imageScale;
+    private bool isEnd;//是否已经结束
     private bool isClicked;//是否已经被点击
     private void Start()
     {       
+        isEnd = false;
         isClicked = false;
         image.transform.localScale = Vector3.zero;//初始将判定部分置零
         buttonScale = button.transform.localScale;
     }
     private void Update()
     {
-        if (isClicked == false)
+        if (isEnd == false)
         {
             image.transform.localScale += Vector3.one * 0.002f * Time.timeScale;//判定部分随时间增大       
         }
@@ -35,25 +43,46 @@ public class ButtonClick : MonoBehaviour
     /// </summary>
     public void Judgment()
     {
+        isEnd = true;
         isClicked = true;
         Vector3 difference = buttonScale - imageScale;       
         if (-0.10f < difference.x  && difference.x < 0.10f)
         {
+            Score(diffculty);
             print("Perfect");
             print(difference);
         }
         if ((-0.2f < difference.x && difference.x < -0.1f) || (0.1f < difference.x && difference.x < 0.2f))
         {
+            Score(diffculty);
             print("Good");
             print(difference);
         }
         if (( difference.x < -0.2f) || (0.2f < difference.x))
         {
+            Score(diffculty);
             print("Bad");
             print(difference);
         }
-        anim.SetBool("IsClicked", true);
+        anim.SetBool("IsEnd", true);
         
+    }
+    private void Score(int dif)
+    {
+        ProgressBar gameObject = GameObject.FindWithTag("Slider").gameObject.GetComponent<ProgressBar>();
+        switch (dif)
+        {
+            case 0:
+                gameObject.currentProgress += dif0;
+                break;
+            case 1:
+                gameObject.currentProgress += dif1;
+                break;
+            case 2:
+                gameObject.currentProgress += dif2;
+                break;
+            
+        }
     }
     //动画之后摧毁物体
     public void DestroyGameObject()
@@ -63,8 +92,8 @@ public class ButtonClick : MonoBehaviour
     //超时没点
     public void NotClicked()
     {
-        isClicked = true;
+        isEnd = true;
         print("Miss");
-        anim.SetBool("IsClicked", true);
+        anim.SetBool("IsEnd", true);
     }
 }
