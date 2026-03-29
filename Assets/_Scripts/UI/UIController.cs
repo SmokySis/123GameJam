@@ -63,7 +63,7 @@ public class UIController : Singleton<UIController>
     [SerializeField] GameObject MessageButtonPrefab;
     [SerializeField] GameObject TextContainerPrefab;
     List<string> detailedMessages;
-    List<Text> messageContainers = new List<Text>();
+    List<TextContainer> messageContainers = new List<TextContainer>();
 
     private void Awake()
     {
@@ -226,8 +226,9 @@ public class UIController : Singleton<UIController>
         for (int i = 0; i < detailedMessages.Count; i++)
         {
             GameObject container = poolCenter.GetInstance(TextContainerPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
-            messageContainers.Add(container.GetComponent<Text>());
-            container.GetComponent<Text>().text = detailedMessages[i];
+            messageContainers.Add(container.GetComponent<TextContainer>());
+            container.GetComponent<TextContainer>().dialogueText.text = detailedMessages[i];
+            container.GetComponent<TextContainer>().SetSize();
             container.SetActive(false);
         }
     }
@@ -243,7 +244,7 @@ public class UIController : Singleton<UIController>
 
     public void StartShowDialogue()
     {
-
+        DialogueCoroutine = StartCoroutine(ShowDialogueCoroutine());
     }
 
     public void ReleaseDetailedPanel()

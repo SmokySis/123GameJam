@@ -14,6 +14,7 @@ public class MessagePanelEvent : PanelClickEvents
         controller.StopMessageCoroutine();
         controller.ResetMessagePanel();
         controller.DetailPanel.SetActive(true);
+        controller.StartShowDialogue();
     }
 
     protected override void PanelOnClick_Right()
