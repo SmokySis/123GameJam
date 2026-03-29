@@ -19,6 +19,11 @@ public class UIController : Singleton<UIController>
     [Header("UI组件_疲劳度")]
     [SerializeField] public float tiringPercent = 0f;
     [SerializeField] Image tiringFillImage;
+    [SerializeField] Window bilibili;
+    [SerializeField] CanvasGroup canvasGroup;
+    [SerializeField] Image tiringHead;
+    [SerializeField] List<Sprite> tiringHeads;
+    [SerializeField] Text tiringWarning;
 
     [Header("UI组件_音量")]
     [SerializeField] Slider masterSlider;
@@ -113,9 +118,31 @@ public class UIController : Singleton<UIController>
     void RefreshTiring()
     {
         tiringFillImage.fillAmount = tiringPercent;
-        if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; return; }
-        if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; return; }
+        if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); return; }
+        if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return; }
+        if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return; }
+        tiringHead.sprite = tiringHeads[0];
         tiringFillImage.color = lowTiringColor;
+    }
+    private IEnumerator TiringDownCo()
+    {
+        tiringWarning.gameObject.SetActive(true);
+        bool isActive = bilibili.gameObject.activeSelf;
+        bilibili.gameObject.SetActive(true);
+        bilibili.SetForeground();
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        tiringHead.sprite = tiringHeads[3];
+        while (tiringPercent > 0)
+        {
+            tiringPercent -= 0.01f;
+            yield return new WaitForSeconds(1);
+        }
+        tiringPercent = 0;
+        tiringWarning.gameObject.SetActive(false);
+        bilibili.gameObject.SetActive(isActive);
+        canvasGroup.interactable = true;
+        canvasGroup.blocksRaycasts = true;
     }
 
     public void SetPause()

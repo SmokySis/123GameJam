@@ -126,7 +126,7 @@ public class Window : MonoBehaviour, IPointerClickHandler, IPointerDownHandler, 
         isDragging = false;
     }
 
-    private void SetForeground()
+    public void SetForeground()
     {
         transform.SetAsLastSibling();
 
