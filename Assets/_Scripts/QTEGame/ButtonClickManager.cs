@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonClickManager : MonoBehaviour
 {
-    public Slider slider;
+    public GameObject slider;
     private ProgressBar progressBar;
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//³ÐÔØµÄpanel   
@@ -18,7 +18,8 @@ public class ButtonClickManager : MonoBehaviour
     public float startTime = 0.25f;
     private void Start()
     {
-        progressBar = slider.GetComponent<ProgressBar>();
+        GameObject sliderClone = Instantiate(slider, panelRect);
+        progressBar = sliderClone.GetComponent<ProgressBar>();
     }
     private void Update()
     {

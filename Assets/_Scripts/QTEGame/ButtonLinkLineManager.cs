@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonLinkLineManager : MonoBehaviour
 {
-    public Slider slider;
+    public GameObject slider;
     private ProgressBar progressBar;
     bool isStart = false;
     public float startTime = 0.25f;   
@@ -21,7 +21,8 @@ public class ButtonLinkLineManager : MonoBehaviour
     private GameObject linkLine;
     void Start()
     {
-        progressBar = slider.GetComponent<ProgressBar>();       
+        GameObject sliderClone = Instantiate(slider, panel);
+        progressBar = sliderClone.GetComponent<ProgressBar>();       
         
     }
     private void Update()

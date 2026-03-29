@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TypingManager : MonoBehaviour
 {
-    public Slider slider;
+    public GameObject slider;
     private ProgressBar progressBar;
     bool isStart = false;
     public float startTime = 0.25f;
@@ -19,7 +19,8 @@ public class TypingManager : MonoBehaviour
     private GameObject field;
     private void Start()
     {
-        progressBar = slider.GetComponent<ProgressBar>();
+        GameObject sliderClone = Instantiate(slider, panel);
+        progressBar = sliderClone.GetComponent<ProgressBar>();
     }
     private void Update()
     {
