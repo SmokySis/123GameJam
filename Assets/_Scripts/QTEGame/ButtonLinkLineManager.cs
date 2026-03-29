@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TaskSystem;
 using TaskSystem.Event;
 using UnityEngine;
@@ -51,6 +53,22 @@ public class ButtonLinkLineManager : MonoBehaviour
         }
         if (progressBar == null)
             return;
+
+        switch (diffculty)
+        {
+            case 0:
+                spawnCount = 4;
+                break;
+            case 1:
+                spawnCount = 6;
+                break;
+            case 2:
+                spawnCount = 9;
+                break;
+            
+        }
+
+
         if (progressBar.GetProgress() > startTime && !isStart)
         {
             isStart = true;
@@ -68,9 +86,15 @@ public class ButtonLinkLineManager : MonoBehaviour
                         squareRect.anchoredPosition = spawnPoints[i];
                         squareRect.sizeDelta = new Vector2(squareSize, squareSize);
                     }               
+                }
+                for (int i = spawnCount; i < 9; i++)
+                {
+                    Destroy(buttonLinkLineScript.targetButtons[i].gameObject);
+                    buttonLinkLineScript.targetButtons[i] = null;
 
                 }
-                                   
+                buttonLinkLineScript.targetButtons = buttonLinkLineScript.targetButtons.Take(spawnCount).ToArray();//截断
+
             }
         }
 
@@ -92,8 +116,8 @@ public class ButtonLinkLineManager : MonoBehaviour
         {
             // 生成 Panel 范围内的随机坐标
             Vector2 randomPos = new Vector2(
-                Random.Range(panel.rect.xMin + squareSize / 2, panel.rect.xMax - squareSize / 2),
-                Random.Range(panel.rect.yMin + squareSize / 2, panel.rect.yMax - squareSize / 2)
+                UnityEngine.Random.Range(panel.rect.xMin + squareSize / 2, panel.rect.xMax - squareSize / 2),
+                UnityEngine.Random.Range(panel.rect.yMin + squareSize / 2, panel.rect.yMax - squareSize / 2)
             );
 
             // 检查是否与已有点距离过近

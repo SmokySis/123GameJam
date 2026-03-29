@@ -330,6 +330,7 @@ GameObject:
   - component: {fileID: 1414359004}
   - component: {fileID: 1414359005}
   - component: {fileID: 1414359006}
+  - component: {fileID: 1414359007}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -406,9 +407,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9d8fe1c8ef17148b6d6a2b7983e858, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   buttonClickPrefab: {fileID: 1841088010465708254, guid: 1ce4ad3c7181abc469a28e101085afbf, type: 3}
   panelRect: {fileID: 1414359001}
+  difficulty: 0
+  dif0: 0.1
+  dif1: 0.05
+  dif2: 0.02
   spawnCount: 10
   squareSize: 100
   minDistance: 110
@@ -425,11 +429,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fb82fd6c2dfc3a4ab5a8e3f883a85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
+  diffculty: 2
+  dif0: 0.3
+  dif1: 0
+  dif2: 0
   startTime: 0.25
   panel: {fileID: 1414359001}
   buttonLinkLine: {fileID: 2658207742418542512, guid: ecd3b71c6c11ed04986e5340e7065f71, type: 3}
-  buttonLinkLineTemPlate: {fileID: 1654249192066613944, guid: 31213eea315c97a4088273bdb6bc7feb, type: 3}
+  spawnCount: 9
+  squareSize: 200
+  minDistance: 210
 --- !u!114 &1414359006
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -442,11 +451,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
+  diffculty: 0
+  dif0: 0
+  dif1: 0
+  dif2: 0
   startTime: 0.25
   panel: {fileID: 1414359001}
   targetText: {fileID: 2505873300874954934, guid: a535d634aaa35e548af25a707d0b371e, type: 3}
   inputField: {fileID: 5225337250521027534, guid: 79fd4d3677bc393428f7f3e06c5bac5f, type: 3}
+--- !u!114 &1414359007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414359000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 862d93be3c88c374fa53034984666d96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUpdate: 0
+  difficulty: 0
+  dif0: 0.05
+  dif1: 0
+  dif2: 0
+  sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
+  panelRect: {fileID: 1414359001}
+  taskID: 0
 --- !u!1 &1860005570
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,8 +12,7 @@ public class ButtonLinkLine : MonoBehaviour
 
 
 
-    public Button[] targetButtons; //这个数组用于计录按钮 
-    public int maxClickCount = 9;     // 最多点几个按钮（数组上限）
+    public Button[] targetButtons; //这个数组用于计录按钮    
 
     public List<Button> clickList = new List<Button>();
     private List<GameObject> lineList = new List<GameObject>();
@@ -44,7 +43,7 @@ public class ButtonLinkLine : MonoBehaviour
             Check();
         }   
         // 如果有正在跟随鼠标的线，并且还没点满
-        if (currentFollowLine != null && clickList.Count < maxClickCount)
+        if (currentFollowLine != null && clickList.Count < targetButtons.Length)
         {
             UpdateFollowLineToMouse();
         }
@@ -58,7 +57,7 @@ public class ButtonLinkLine : MonoBehaviour
         if (clickList.Contains(btn))
             return;
         // 已经点满了，不再响应
-        if (clickList.Count >= maxClickCount)
+        if (clickList.Count >= targetButtons.Length)
             return;
         // 把当前点击的按钮加入列表
         clickList.Add(btn);
@@ -76,7 +75,7 @@ public class ButtonLinkLine : MonoBehaviour
             FixLastLineTo(btn);
 
             // 没点满才继续创建新跟随线
-            if (clickList.Count<maxClickCount)
+            if (clickList.Count < targetButtons.Length)
             {
                 lastBtn = btn;
                 CreateFollowLine(btn);
@@ -184,7 +183,7 @@ public class ButtonLinkLine : MonoBehaviour
         //{
         //    print("Bad");
         //}
-        if (clickList.Count == maxClickCount)
+        if (clickList.Count == targetButtons.Length)
         {
             isCompleted = true;
             print("Good");
