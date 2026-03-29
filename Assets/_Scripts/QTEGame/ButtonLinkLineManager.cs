@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class ButtonLinkLineManager : MonoBehaviour
 {
-    public GameObject slider;
+    private GameObject sliderClone;
     private ProgressBar progressBar;
-    bool isStart = false;
+    private bool isStart = false;
+    private bool isGet = false;
     public float startTime = 0.25f;   
 
     public RectTransform panel;
@@ -25,16 +26,18 @@ public class ButtonLinkLineManager : MonoBehaviour
     public float squareSize = 200f;
     public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
-    bool isGenerate = false;
-    void Start()
-    {
-        GameObject sliderClone = Instantiate(slider, panel);
-        progressBar = sliderClone.GetComponent<ProgressBar>();       
-        
-    }
+    private bool isGenerate = false;    
     private void Update()
     {
-                  
+        if (sliderClone == null)
+            sliderClone = GameObject.FindWithTag("Slider");
+        if (sliderClone != null && !isGet)
+        {
+            progressBar = sliderClone.GetComponent<ProgressBar>();
+            isGet = true;
+        }
+        if (progressBar == null)
+            return;
         if (progressBar.GetProgress() > startTime && !isStart)
         {
             isStart = true;

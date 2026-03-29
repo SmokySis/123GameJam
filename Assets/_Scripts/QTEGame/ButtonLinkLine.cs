@@ -187,7 +187,10 @@ public class ButtonLinkLine : MonoBehaviour
         {
             isCompleted = true;
             print("Good");
-
+        }
+        else
+        {
+            print("Bad");
         }
     }  
     

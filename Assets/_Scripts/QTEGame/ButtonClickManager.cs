@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ButtonClickManager : MonoBehaviour
 {
-    public GameObject slider;
+    private GameObject sliderClone;
     private ProgressBar progressBar;
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//承载的panel   
@@ -13,16 +13,21 @@ public class ButtonClickManager : MonoBehaviour
     public float squareSize = 200f;    
     public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
+    bool isGet;
     bool isStart = false;
     bool isGenerate = false;
-    public float startTime = 0.25f;
-    private void Start()
-    {
-        GameObject sliderClone = Instantiate(slider, panelRect);
-        progressBar = sliderClone.GetComponent<ProgressBar>();
-    }
+    public float startTime = 0.25f;   
     private void Update()
     {
+        if (sliderClone == null)
+            sliderClone = GameObject.FindWithTag("Slider");
+        if (sliderClone != null && !isGet)
+        {
+            progressBar = sliderClone.GetComponent<ProgressBar>();
+            isGet = true;
+        }
+        if (progressBar == null)
+            return;
         //等到开始任务后几秒再开始造点
         if(progressBar.GetProgress() > startTime && !isStart)
         {

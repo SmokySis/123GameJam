@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: 9024809065967905408}
   m_Layer: 5
   m_Name: ProgressBar
-  m_TagString: Untagged
+  m_TagString: Slider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

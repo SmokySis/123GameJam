@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TaskSystem;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TypingManager : MonoBehaviour
 {
-    public GameObject slider;
+
+    private GameObject sliderClone;
     private ProgressBar progressBar;
     bool isStart = false;
     public float startTime = 0.25f;
@@ -14,16 +16,27 @@ public class TypingManager : MonoBehaviour
     public RectTransform panel;
     public GameObject targetText;
     public GameObject inputField;
+    private bool isGet;
+
 
     private GameObject text;
     private GameObject field;
-    private void Start()
-    {
-        GameObject sliderClone = Instantiate(slider, panel);
-        progressBar = sliderClone.GetComponent<ProgressBar>();
-    }
+    
     private void Update()
     {
+        if (sliderClone == null)
+            sliderClone = GameObject.FindWithTag("Slider");
+        if (sliderClone != null && !isGet)
+        {
+            progressBar = sliderClone.GetComponent<ProgressBar>();
+            isGet = true;
+        }
+
+        if (progressBar == null)
+        {
+            return;
+        }
+
         if (progressBar.GetProgress() > startTime && !isStart)
         {
             isStart = true;
