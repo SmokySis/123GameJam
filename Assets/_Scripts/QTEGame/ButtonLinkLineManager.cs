@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class ButtonLinkLineManager : MonoBehaviour
 {
 
-    public int diffculty;//传入的难度系数
+    public int difficulty;//传入的难度系数
     [Header("三种难度加的数值")]
     public float dif0 = 0f;
     public float dif1 = 0f;
@@ -56,7 +56,7 @@ public class ButtonLinkLineManager : MonoBehaviour
         if (progressBar == null)
             return;
 
-        switch (diffculty)
+        switch (difficulty)
         {
             case 0:
                 spawnCount = 4;
@@ -103,7 +103,7 @@ public class ButtonLinkLineManager : MonoBehaviour
         if (buttonLinkLineScript != null && buttonLinkLineScript.isCompleted)
         {
             //Destroy(templete);
-            Score(diffculty);
+            Score(difficulty);
             Destroy(linkLine);
             TaskManager.Instance.TaskEventCenter.RaiseRunning<EndSecondQTEEvent>(endSecondQTEEvent);
         }

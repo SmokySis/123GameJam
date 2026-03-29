@@ -16,12 +16,18 @@ public class SliderCreating : MonoBehaviour
     public GameObject sliderPrefab;
     public RectTransform panelRect;//³ÐÔØµÄpanel
     public int taskID;  
+    public TaskData taskData;
 
     private GameObject sliderClone;    
     private void Start()
     {
+        taskData = TaskLoader.Instance.GetTaskData(taskID);
+        if (taskData != null )
+        {
+            difficulty = (int)taskData.TaskDifficulty;
+        }
         sliderClone = Instantiate(sliderPrefab,panelRect);
-        //sliderClone.gameObject.SetActive(false);
+        sliderClone.gameObject.SetActive(false);
        
         if (TaskManager.Instance.IsTaskActive(taskID))
         {
