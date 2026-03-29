@@ -410,9 +410,9 @@ MonoBehaviour:
   buttonClickPrefab: {fileID: 1841088010465708254, guid: 1ce4ad3c7181abc469a28e101085afbf, type: 3}
   panelRect: {fileID: 1414359001}
   difficulty: 2
-  dif0: 0.1
-  dif1: 0.05
-  dif2: 0.02
+  dif0: 0.2
+  dif1: 0.1
+  dif2: 0.05
   speed0: 0.005
   speed1: 0.01
   speed2: 0.02
@@ -427,12 +427,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414359000}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fb82fd6c2dfc3a4ab5a8e3f883a85c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffculty: 2
+  diffculty: 1
   dif0: 0.3
   dif1: 0
   dif2: 0
@@ -449,15 +449,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414359000}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 540c671526c158f468df1f2013c1284d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diffculty: 0
-  dif0: 0
-  dif1: 0
-  dif2: 0
+  diffculty: 2
+  dif0: 1
+  dif1: 1
+  dif2: 1
   startTime: 0.1
   panel: {fileID: 1414359001}
   targetText: {fileID: 2505873300874954934, guid: a535d634aaa35e548af25a707d0b371e, type: 3}
@@ -476,9 +476,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isUpdate: 0
   difficulty: 0
-  dif0: 0.01
-  dif1: 0
-  dif2: 0
+  dif0: 0.08
+  dif1: 0.05
+  dif2: 0.02
   sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   panelRect: {fileID: 1414359001}
   taskID: 0
