@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 4003
-  Description: "\u753B\u7A3F\u4EF6"
+  Description: "\u25A1 \u753B\u7A3F\u4EF6"
   IsNecessary: 1
   Score: 2000
   TaskDifficulty: 2

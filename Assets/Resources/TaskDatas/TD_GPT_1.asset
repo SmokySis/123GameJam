@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 2001
-  Description: "\u603B\u7ED3\u6587\u7AE0\u5927\u7EB2"
+  Description: "\u25A1 \u603B\u7ED3\u6587\u7AE0\u5927\u7EB2"
   IsNecessary: 1
   Score: 100
   TaskDifficulty: 0

@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 3001
-  Description: "\u6574\u5408\u8BFE\u5802PPT"
+  Description: "\u25A1 \u6574\u5408\u8BFE\u5802PPT"
   IsNecessary: 1
   Score: 200
   TaskDifficulty: 0

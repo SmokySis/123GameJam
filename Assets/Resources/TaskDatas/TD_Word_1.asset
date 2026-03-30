@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 6001
-  Description: "\u5199\u7B80\u5386\u6587\u6863"
+  Description: "\u25A1 \u5199\u7B80\u5386\u6587\u6863"
   IsNecessary: 1
   Score: 200
   TaskDifficulty: 0

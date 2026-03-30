@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 3002
-  Description: "\u5B8C\u6210\u5C0F\u7EC4\u6C47\u62A5PPT"
+  Description: "\u25A1 \u5B8C\u6210\u5C0F\u7EC4\u6C47\u62A5PPT"
   IsNecessary: 1
   Score: 400
   TaskDifficulty: 1
