@@ -34,7 +34,7 @@ public class Settlement : Utility.Singleton<Settlement>
     [Button]
     public void End(int power, float score)
     {
-        if (power < 0)
+        if (power <= 0)
         {
             _finalScore = score;
             StartCoroutine(EndScene());

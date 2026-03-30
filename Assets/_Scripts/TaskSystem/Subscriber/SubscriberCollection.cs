@@ -22,7 +22,10 @@ namespace TaskSystem.Subscriber
             protected override void OnEvent(in End1AndStart2Event gameEvent)
             {
                 if (_taskID == gameEvent.oldID + 1)
-                    CoroutineRunner.Instance.Delay(3, () => { TaskManager.Instance.RequestActivateTask(_taskID); WindowsController.Instance.PlayMessagePanel(_taskID); });
+                {
+                    WindowsController.Instance.PlayMessagePanel(_taskID);
+                    CoroutineRunner.Instance.Delay(3, () => { TaskManager.Instance.RequestActivateTask(_taskID); });
+                }
             }
         }
     }
@@ -43,7 +46,10 @@ namespace TaskSystem.Subscriber
             protected override void OnEvent(in End2AndStart3Event gameEvent)
             {
                 if (_taskID == gameEvent.oldID + 1)
-                    CoroutineRunner.Instance.Delay(3, () => { TaskManager.Instance.RequestActivateTask(_taskID); WindowsController.Instance.PlayMessagePanel(_taskID); });
+                {
+                    WindowsController.Instance.PlayMessagePanel(_taskID);
+                    CoroutineRunner.Instance.Delay(3, () => { TaskManager.Instance.RequestActivateTask(_taskID); });
+                }
             }
         }
     }
