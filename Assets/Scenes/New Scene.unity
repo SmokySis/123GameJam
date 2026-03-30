@@ -9182,6 +9182,7 @@ MonoBehaviour:
   panelRect: {fileID: 930821452}
   taskID: 1001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!1 &939711695
 GameObject:
   m_ObjectHideFlags: 0
@@ -10271,8 +10272,9 @@ MonoBehaviour:
   dif2: 0
   sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   panelRect: {fileID: 1238711211}
-  taskID: 1001
+  taskID: 6001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!1 &1262042766
 GameObject:
   m_ObjectHideFlags: 0
@@ -11277,6 +11279,7 @@ MonoBehaviour:
   panelRect: {fileID: 1415225571}
   taskID: 3001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!1 &1429045082
 GameObject:
   m_ObjectHideFlags: 0
@@ -11533,6 +11536,7 @@ MonoBehaviour:
   panelRect: {fileID: 1483477008}
   taskID: 4001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!114 &1483477018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11829,6 +11833,7 @@ MonoBehaviour:
   panelRect: {fileID: 1500359293}
   taskID: 5001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!1 &1503597790
 GameObject:
   m_ObjectHideFlags: 0
@@ -12544,6 +12549,7 @@ MonoBehaviour:
   panelRect: {fileID: 1615907039}
   taskID: 2001
   taskData: {fileID: 0}
+  sliderClone: {fileID: 0}
 --- !u!1 &1629792760
 GameObject:
   m_ObjectHideFlags: 0
