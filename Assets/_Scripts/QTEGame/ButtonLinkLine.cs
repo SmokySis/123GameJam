@@ -47,6 +47,7 @@ public class ButtonLinkLine : MonoBehaviour
         {
             UpdateFollowLineToMouse();
         }
+        Check();
     }
     /// <summary>
     /// 按钮点击时执行
@@ -143,20 +144,6 @@ public class ButtonLinkLine : MonoBehaviour
         lineRect.localEulerAngles = new Vector3(0, 0, angle);
     }
 
-    /// <summary>
-    /// 清空所有连线和记录，重新开始
-    /// </summary>
-    public void ClearAll()
-    {
-        foreach (var l in lineList)
-        {
-            Destroy(l);
-        }
-        lineList.Clear();
-        clickList.Clear();
-        currentFollowLine = null;
-        lastBtn = null;
-    }
     /// <summary>
     /// 提交
     /// </summary>
