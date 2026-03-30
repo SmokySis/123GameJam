@@ -18,7 +18,7 @@ public class ButtonEvent : MonoBehaviour
     [SerializeField]GameObject panel;
     public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); }
     public void CloseButtonOnClick() => panel.SetActive(false);
-    public void StartSettingButtonOnClick() { controller.SetPause();  }
+    public void StartSettingButtonOnClick() { controller.SetPause(); AudioManager.Instance.Play("Au_UI_Click"); }
     public void CloseSettingButtonOnClick() => controller.SetPlay();
     public void StartAudioOnClick() => controller.SetAudioActive();
     public void CloseAudioOnClick() => controller.CloseAudioPanel();

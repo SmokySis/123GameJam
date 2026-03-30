@@ -70,12 +70,50 @@ MonoBehaviour:
     rolloffMode: 1
     maxConcurrent: 3
     coolTime: 0
-  - id: au_test_ui001
+  - id: Au_UI_Click
     playType: 0
     clips:
     - {fileID: 8300000, guid: dd10a01e277c19a4dbdd14cafee37a2c, type: 3}
     autoAudioBus: 1
     bus: 3
+    mixerGroup: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    volumeRandom: 0
+    pitchRandom: 0
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 25
+    rolloffMode: 0
+    maxConcurrent: -1
+    coolTime: 0
+  - id: Au_SFX_PopWindow
+    playType: 0
+    clips:
+    - {fileID: 8300000, guid: b8ce5e16fcd5e48448bf410640ae36bb, type: 3}
+    autoAudioBus: 1
+    bus: 2
+    mixerGroup: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 0
+    volumeRandom: 0
+    pitchRandom: 0
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 25
+    rolloffMode: 0
+    maxConcurrent: -1
+    coolTime: 0
+  - id: Au_SFX_NodeClick
+    playType: 0
+    clips:
+    - {fileID: 8300000, guid: 4dc9fa0f7649491429c88b240257273b, type: 3}
+    autoAudioBus: 1
+    bus: 2
     mixerGroup: {fileID: 0}
     volume: 1
     pitch: 1
