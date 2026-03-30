@@ -41,12 +41,7 @@ public class ButtonClickManager : MonoBehaviour
         progressBar = null;        
     }
     private void OnDisable()
-    {
-        List<GameObject> allTargets = FindInactiveObjectsWithTag("Button");
-        foreach (var item in allTargets)
-        {
-            //Destroy(item);            
-        }
+    {       
         
     }
     private void Update()
@@ -146,18 +141,5 @@ public class ButtonClickManager : MonoBehaviour
         }
 
     }
-    public List<GameObject> FindInactiveObjectsWithTag(string tag)
-    {
-        List<GameObject> result = new List<GameObject>();
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-
-        foreach (GameObject go in allObjects)
-        {
-            if (go.CompareTag(tag))
-            {
-                result.Add(go);
-            }
-        }
-        return result;
-    }
+   
 }

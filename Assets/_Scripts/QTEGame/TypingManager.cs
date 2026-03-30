@@ -77,7 +77,7 @@ public class TypingManager : MonoBehaviour
     }
     private void Score(int dif)
     {
-        ProgressBar gameObject = GameObject.FindWithTag("Slider").gameObject.GetComponent<ProgressBar>();
+        ProgressBar gameObject = sliderClone.GetComponent<ProgressBar>();
         switch (dif)
         {
             case 0:

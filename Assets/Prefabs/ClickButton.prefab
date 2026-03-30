@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7697577322356713938}
   m_Layer: 5
   m_Name: ClickButton
-  m_TagString: Button
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,6 +63,7 @@ MonoBehaviour:
   image: {fileID: 5655064622336168005}
   buttonScale: {x: 0, y: 0, z: 0}
   imageScale: {x: 0, y: 0, z: 0}
+  g: {fileID: 0}
 --- !u!95 &7697577322356713938
 Animator:
   serializedVersion: 5
