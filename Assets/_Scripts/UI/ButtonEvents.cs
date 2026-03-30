@@ -23,6 +23,9 @@ public class ButtonEvent : MonoBehaviour
     public void StartAudioOnClick() => controller.SetAudioActive();
     public void CloseAudioOnClick() => controller.CloseAudioPanel();
 
+    public void StartPlatformButtonOnClick() { if (GameController.Instance.isActive) return; panel.SetActive(true); GameController.Instance.LoadGame(); }
+    public void ClosePlatformButtonOnClick() { panel.SetActive(false); GameController.Instance.ResetGame(); }
+
     public void BackToMainMenuOnClick()
     {
         // AudioManager.Instance.Play("au_test_ui001");

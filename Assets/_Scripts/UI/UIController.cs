@@ -90,10 +90,9 @@ public class UIController : Singleton<UIController>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape)) HandleESC();
         RefreshBattery();
         RefreshTiring();
-
-        if (Input.GetKeyDown(KeyCode.Escape)) HandleESC();
     }
 
     IEnumerator UpdateTime()

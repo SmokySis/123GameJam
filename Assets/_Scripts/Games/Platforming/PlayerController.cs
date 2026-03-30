@@ -107,7 +107,7 @@ public class PlayerController : MonoBehaviour
             camera = Camera.main;
         }
 
-        if (TimeState == TimeStates.Normal && !GameController.isPaused)
+        if (TimeState == TimeStates.Normal && !UIController.Instance.isPaused)
         {
 
             // Dash 时间计时（在 Update 中累计）
@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
         if (TimeState == TimeStates.Normal)
         {
-            if (GameController.isPaused) return;
+            if (UIController.Instance.isPaused) return;
             isOnGround = IsGrounded();
 
 
@@ -441,7 +441,6 @@ public class PlayerController : MonoBehaviour
 
         if (isOnGround && Mathf.Abs(rb.velocity.y) < 0.1f)
         {
-            Debug.Log(onGroundCount);
             onGroundCount += Time.deltaTime;
             if (onGroundCount <= 0.05f && !isScalePlayed)
             {
@@ -598,15 +597,20 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == 7 && (PlayerState == PlayerStates.fall || PlayerState == PlayerStates.jump))
+        if (collision.gameObject.layer != 6) return;
+        if (PlayerState != PlayerStates.fall && PlayerState != PlayerStates.jump) return;
+        if (Input.GetAxisRaw("Horizontal") == 0) return;
+
+        foreach (var contact in collision.contacts)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0)
+            if (Mathf.Abs(contact.normal.x) > 0.5f)
             {
                 rb.velocity = new Vector2(rb.velocity.x, SlideSpeed);
                 if (!canSecondJump)
                 {
                     canSecondJump = true;
                 }
+                break;
             }
         }
     }
