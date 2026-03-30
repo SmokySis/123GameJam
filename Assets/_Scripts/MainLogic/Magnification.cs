@@ -9,10 +9,14 @@ public class Magnification : MonoBehaviour
     private float _lastIncreaseTime;
     private Slider[] _currentSliders;
     private int[] _lastTiers; // 用档位记录，绝对精准
-    public Text text;
+    public Text text1;
+    public Text text2;
 
     void Start()
     {
+        float i = 0;
+        text2.text = i.ToString(); 
+
         _lastIncreaseTime = Time.time;
         magnification = 1.0f;
     }
@@ -32,7 +36,7 @@ public class Magnification : MonoBehaviour
             magnification = 1.0f;
             _lastIncreaseTime = Time.time;
         }
-        text.text = magnification.ToString();
+        text1.text = magnification.ToString();
     }
 
     void FindActiveSliders()

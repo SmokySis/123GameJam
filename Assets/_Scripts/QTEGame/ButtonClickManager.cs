@@ -23,7 +23,7 @@ public class ButtonClickManager : MonoBehaviour
     public float speed1 = 0.5f;
     public float speed2 = 0.7f;
 
-    public int spawnCount = 10;
+    public int spawnCount = 20;
     public float squareSize = 200f;    
     public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
@@ -53,18 +53,18 @@ public class ButtonClickManager : MonoBehaviour
             progressBar = sliderClone.GetComponent<ProgressBar>();
             difficulty = progressBar.difficulty;
             isGet = true;
-            switch (difficulty)
-            {
-                case 0:
-                    spawnCount = 5;
-                    break;
-                case 1:
-                    spawnCount = 10;
-                    break;
-                case 2:
-                    spawnCount = 20;
-                    break;
-            }
+            //switch (difficulty)
+            //{
+            //    case 0:
+            //        spawnCount = 5;
+            //        break;
+            //    case 1:
+            //        spawnCount = 10;
+            //        break;
+            //    case 2:
+            //        spawnCount = 20;
+            //        break;
+            //}
         }
         if (progressBar == null)
             return;

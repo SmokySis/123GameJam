@@ -36,9 +36,7 @@ public class TypingManager : MonoBehaviour
         isGet = false;
         typing = null;
         sliderClone = null;
-        progressBar = null;
-        targetText = null;
-        inputField = null;
+        progressBar = null;        
         text = null;
         field = null;
     }
