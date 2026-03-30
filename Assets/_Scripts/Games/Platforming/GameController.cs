@@ -42,6 +42,7 @@ public class GameController : Singleton<GameController>
 
     public void Failure()
     {
-        activeMap.ResetPlayer();
+        ResetGame();
+        LoadGame();
     }
 }

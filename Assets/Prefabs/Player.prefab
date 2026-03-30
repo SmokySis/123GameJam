@@ -126,7 +126,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 8697052321365466848}
   PlayerSpeed: 5
-  PlayerJumpSpeed: 10
+  PlayerJumpSpeed: 15
   DashSpeed: 20
   WallSlideSpeed: -2
   DashTime: 0.6
