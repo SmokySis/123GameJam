@@ -15,20 +15,20 @@ public class ButtonEvent : MonoBehaviour
         controller = UIController.Instance;
     }
 
-    [SerializeField]GameObject panel;
-    public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); }
-    public void CloseButtonOnClick() => panel.SetActive(false);
+    [SerializeField] GameObject panel;
+    public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void CloseButtonOnClick() { panel.SetActive(false); AudioManager.Instance.Play("Au_UI_Click"); }
     public void StartSettingButtonOnClick() { controller.SetPause(); AudioManager.Instance.Play("Au_UI_Click"); }
-    public void CloseSettingButtonOnClick() => controller.SetPlay();
-    public void StartAudioOnClick() => controller.SetAudioActive();
-    public void CloseAudioOnClick() => controller.CloseAudioPanel();
+    public void CloseSettingButtonOnClick() { controller.SetPlay(); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void StartAudioOnClick() { controller.SetAudioActive(); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void CloseAudioOnClick() { controller.CloseAudioPanel(); AudioManager.Instance.Play("Au_UI_Click"); }
 
-    public void StartPlatformButtonOnClick() { if (GameController.Instance.isActive) return; panel.SetActive(true); GameController.Instance.LoadGame(); }
-    public void ClosePlatformButtonOnClick() { panel.SetActive(false); GameController.Instance.ResetGame(); }
+    public void StartPlatformButtonOnClick() { if (GameController.Instance.isActive) return; panel.SetActive(true); GameController.Instance.LoadGame(); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void ClosePlatformButtonOnClick() { panel.SetActive(false); GameController.Instance.ResetGame(); AudioManager.Instance.Play("Au_UI_Click"); }
 
-    public void BackToMainMenuOnClick() => LoadSceneManager.Instance.LoadMenuScene();
+    public void BackToMainMenuOnClick() { LoadSceneManager.Instance.LoadMenuScene(); AudioManager.Instance.Play("Au_UI_Click"); }
 
-    public void LoadMainSceneOnClick() => LoadSceneManager.Instance.LoadMainScene();
+    public void LoadMainSceneOnClick() { LoadSceneManager.Instance.LoadMainScene(); AudioManager.Instance.Play("Au_UI_Click"); }
 
-    public void ExitGameOnClick() => Application.Quit();
+    public void ExitGameOnClick() {AudioManager.Instance.Play("Au_UI_Click"); Application.Quit();}
 }

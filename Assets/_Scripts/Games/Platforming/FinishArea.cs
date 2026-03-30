@@ -7,6 +7,6 @@ public class FinishArea : MonoBehaviour
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<PlayerController>() != null) GameController.Instance.FinishGame(0);
+        if (collision.gameObject.GetComponent<PlayerController>() != null) GameController.Instance.FinishGame(100);
     }
 }
