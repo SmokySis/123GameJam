@@ -138,8 +138,8 @@ public class ProgressBar : MonoBehaviour
         //需要一个Score
         Text text = GameObject.FindWithTag("Score").GetComponent<Text>();
         //需要一个Magnification
-        float mag = GameObject.FindWithTag("Magnification").GetComponent<Magnification>().GetCurrentMagnification();
-        float scr = sc.taskData.Score;
+        float mag = GameObject.FindWithTag("Magnification").GetComponent<Magnification>().GetMagnification();
+        float scr = sc.taskData.Score;                
         float res = scr * mag;
 
         float temp = System.Convert.ToSingle(text.text);

@@ -3,116 +3,85 @@ using UnityEngine.UI;
 
 public class Magnification : MonoBehaviour
 {
-    [Header("倍率设置")]
-    public float magnification = 1.0f; // 当前倍率
-    public float resetTime = 5f;       // 多久没增长就重置
+    public float magnification = 1.0f;
+    public float resetTime = 5f;
 
-    private float _lastIncreaseTime;          // 最后一次增长时间
-    public  Slider[] _targetSliders;          // 所有带Tag的Slider
-    public  float[] _lastSliderValues;        // 记录每个Slider上一帧的值
+    private float _lastIncreaseTime;
+    private Slider[] _currentSliders;
+    private int[] _lastTiers; // 用档位记录，绝对精准
+    public Text text;
 
     void Start()
     {
-        // 初始化时间
         _lastIncreaseTime = Time.time;
+        magnification = 1.0f;
     }
 
     void Update()
     {
-        // 1. 找到所有 【激活状态】 且 【Tag=Slider】 的Slider
-        _targetSliders = FindActiveSlidersWithTag();
+        FindActiveSliders();
+        if (_currentSliders == null) return;
 
-        if (_targetSliders == null || _targetSliders.Length == 0)
-            return;
+        bool increased = CheckTiers();
 
-        // 第一次运行时初始化记录数组
-        if (_lastSliderValues == null || _lastSliderValues.Length != _targetSliders.Length)
-        {
-            _lastSliderValues = new float[_targetSliders.Length];
-        }
-
-        // 2. 检测每个滑块的 value 变化
-        bool hasIncreased = CheckSliderValueIncrease();
-
-        // 3. 如果有增长，刷新时间
-        if (hasIncreased)
-        {
+        if (increased)
             _lastIncreaseTime = Time.time;
-        }
 
-        // 4. 5秒没增长 → 重置回 1.0
-        if (Time.time - _lastIncreaseTime >= resetTime)
+        if (Time.time - _lastIncreaseTime > resetTime)
         {
             magnification = 1.0f;
-            _lastIncreaseTime = Time.time; // 避免连续重置
+            _lastIncreaseTime = Time.time;
         }
+        text.text = magnification.ToString();
     }
 
-    /// <summary>
-    /// 查找 激活状态、Tag=Slider 的所有 Slider
-    /// </summary>
-    Slider[] FindActiveSlidersWithTag()
+    void FindActiveSliders()
     {
-        // 找到场景中所有 Slider（包含失活）
-        Slider[] allSliders = FindObjectsOfType<Slider>(includeInactive: true);
-        System.Collections.Generic.List<Slider> activeList = new System.Collections.Generic.List<Slider>();
+        Slider[] all = FindObjectsOfType<Slider>(true);
+        System.Collections.Generic.List<Slider> list = new();
 
-        foreach (Slider slider in allSliders)
+        foreach (var s in all)
         {
-            // 只保留：激活 + Tag正确
-            if (slider.gameObject.activeSelf && slider.CompareTag("Slider"))
-            {
-                activeList.Add(slider);
-            }
+            if (s.gameObject.activeSelf && s.CompareTag("Slider"))
+                list.Add(s);
         }
 
-        return activeList.ToArray();
+        _currentSliders = list.ToArray();
+
+        // 同步档位数组长度
+        if (_lastTiers == null || _lastTiers.Length != _currentSliders.Length)
+            _lastTiers = new int[_currentSliders.Length];
     }
 
-    /// <summary>
-    /// 检测所有Slider是否增长了0.1
-    /// </summary>
-    bool CheckSliderValueIncrease()
+    bool CheckTiers()
     {
-        bool increased = false;
+        bool changed = false;
 
-        for (int i = 0; i < _targetSliders.Length; i++)
+        for (int i = 0; i < _currentSliders.Length; i++)
         {
-            Slider slider = _targetSliders[i];
-            float oldValue = _lastSliderValues[i];
-            float newValue = slider.value;
+            float val = _currentSliders[i].value;
+            int nowTier = Mathf.RoundToInt(val * 10); // 关键：乘10取整，绝对精准
 
-            // 计算档位：每 0.1 为一个档位
-            int oldTier = Mathf.FloorToInt(oldValue / 0.1f);
-            int newTier = Mathf.FloorToInt(newValue / 0.1f);
-
-            // 每多一个档位 → 倍率 +0.1
-            int tierDiff = newTier - oldTier;
-            if (tierDiff > 0)
+            if (nowTier > _lastTiers[i])
             {
-                magnification += tierDiff * 0.1f;
-                increased = true;
+                int add = nowTier - _lastTiers[i];
+                magnification += add * 0.1f;
+                changed = true;
             }
 
-            // 更新记录的值
-            _lastSliderValues[i] = newValue;
+            _lastTiers[i] = nowTier;
         }
 
-        return increased;
+        return changed;
     }
 
-    /// <summary>
-    /// 外部获取当前倍率
-    /// </summary>
-    public float GetCurrentMagnification()
+    public float GetMagnification()
     {
-        return magnification;
+        //最终获取时，强制四舍五入到一位小数（保证是 2.0，不是 1.99999）
+        return Mathf.Round(magnification * 10) / 10f;
     }
 
-    /// <summary>
-    /// 手动重置倍率
-    /// </summary>
-    public void ResetMagnification()
+    public void ResetMag()
     {
         magnification = 1.0f;
         _lastIncreaseTime = Time.time;
