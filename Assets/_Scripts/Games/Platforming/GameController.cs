@@ -1,6 +1,5 @@
-using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
-using System.Xml;
 using UnityEngine;
 using Utility;
 
@@ -36,6 +35,7 @@ public class GameController : Singleton<GameController>
     public void FinishGame(float reduceTiring)
     {
         UIController.Instance.tiringPercent -= reduceTiring;
+        GameObject.FindWithTag("Score").GetComponent<Text>().text = (System.Convert.ToSingle(GameObject.FindWithTag("Score").GetComponent<Text>().text) + 1000).ToString();
         ResetGame();
         if (gamePanel) gamePanel.SetActive(false);
     }

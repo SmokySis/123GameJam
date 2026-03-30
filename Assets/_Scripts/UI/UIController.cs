@@ -7,6 +7,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
+using AudioSystem;
 
 enum TiringStates
 { 
@@ -95,7 +96,7 @@ public class UIController : Singleton<UIController>
         masterSlider.onValueChanged.AddListener(OnMasterSliderValueChanged);
         bgmSlider.onValueChanged.AddListener(OnBGMSliderValueChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
-
+        AudioManager.Instance.Play("Au_BGM_111");
         // StartCoroutine(MessagePanelCoroutine("Testing"));
     }
 

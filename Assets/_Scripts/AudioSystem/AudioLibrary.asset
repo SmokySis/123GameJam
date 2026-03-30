@@ -127,3 +127,22 @@ MonoBehaviour:
     rolloffMode: 0
     maxConcurrent: -1
     coolTime: 0
+  - id: Au_BGM_111
+    playType: 0
+    clips:
+    - {fileID: 8300000, guid: 91ca2bf07c611194eafabbe1aabfdda1, type: 3}
+    autoAudioBus: 1
+    bus: 1
+    mixerGroup: {fileID: 0}
+    volume: 1
+    pitch: 1
+    loop: 1
+    volumeRandom: 0
+    pitchRandom: 0
+    is3D: 0
+    spatialBlend: 0
+    minDistance: 1
+    maxDistance: 25
+    rolloffMode: 0
+    maxConcurrent: -1
+    coolTime: 0
