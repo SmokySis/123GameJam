@@ -26,8 +26,9 @@ public class ButtonEvent : MonoBehaviour
     public void StartPlatformButtonOnClick() { if (GameController.Instance.isActive) return; panel.SetActive(true); GameController.Instance.LoadGame(); }
     public void ClosePlatformButtonOnClick() { panel.SetActive(false); GameController.Instance.ResetGame(); }
 
-    public void BackToMainMenuOnClick()
-    {
-        // AudioManager.Instance.Play("au_test_ui001");
-    }
+    public void BackToMainMenuOnClick() => LoadSceneManager.Instance.LoadMenuScene();
+
+    public void LoadMainSceneOnClick() => LoadSceneManager.Instance.LoadMainScene();
+
+    public void ExitGameOnClick() => Application.Quit();
 }
