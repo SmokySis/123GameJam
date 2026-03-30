@@ -37,7 +37,8 @@ public class Magnification : MonoBehaviour
             _lastIncreaseTime = Time.time;
         }
         magnification = Mathf.Round(magnification * 10f) / 10f;
-        text1.text = magnification.ToString();
+        text1.text = (magnification.ToString() + "x");
+
     }
 
     void FindActiveSliders()
