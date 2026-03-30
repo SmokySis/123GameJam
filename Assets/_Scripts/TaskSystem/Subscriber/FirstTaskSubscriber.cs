@@ -27,6 +27,7 @@ namespace TaskSystem.Subscriber
                 Debug.Log(_taskID);
                 //TaskManager.Instance.Lock();
                 TaskManager.Instance.RequestActivateTask(_taskID);
+                //WindowsController.Instance.PlayMessagePanel(_taskID);
                 //TaskManager.Instance.EndLock(3);
             }
         }

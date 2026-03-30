@@ -60,7 +60,7 @@ public class UIController : Singleton<UIController>
     Coroutine MessageCoroutine;
     Coroutine DialogueCoroutine;
     [Header("ÏûÏ¢µ¯´°_")]
-    [SerializeField] Text MessageText;
+    //[SerializeField] Text MessageText;
     [SerializeField] Vector2 UIPostion;
     [SerializeField] Vector2 InitPosition;
     [SerializeField] float slideInSpeed = 200;
@@ -85,7 +85,7 @@ public class UIController : Singleton<UIController>
         bgmSlider.onValueChanged.AddListener(OnBGMSliderValueChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
 
-        StartCoroutine(MessagePanelCoroutine("Testing"));
+       // StartCoroutine(MessagePanelCoroutine("Testing"));
     }
 
     private void Update()
@@ -119,6 +119,7 @@ public class UIController : Singleton<UIController>
     {
         tiringFillImage.fillAmount = tiringPercent;
         if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); return; }
+        if (tiringPercent > 0.9f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[3]; return; }
         if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return; }
         if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return; }
         tiringHead.sprite = tiringHeads[0];
@@ -135,7 +136,7 @@ public class UIController : Singleton<UIController>
         tiringHead.sprite = tiringHeads[3];
         while (tiringPercent > 0)
         {
-            tiringPercent -= 0.01f;
+            //tiringPercent -= 0.01f;
             yield return new WaitForSeconds(1);
         }
         tiringPercent = 0;
@@ -224,7 +225,7 @@ public class UIController : Singleton<UIController>
     IEnumerator MessagePanelCoroutine(string message)
     {
         RectTransform rect = MessagePanel.GetComponent<RectTransform>();
-        MessageText.text = message;
+        //MessageText.text = message;
         rect.gameObject.SetActive(true);
         while (rect.anchoredPosition.x > UIPostion.x)
         {
