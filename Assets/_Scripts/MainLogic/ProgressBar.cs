@@ -85,7 +85,9 @@ public class ProgressBar : MonoBehaviour
                
             }
             sc.taskID++;
-            //Debug.Log(sc.taskID);
+
+            AddScore();//计算分数加分
+
         }
     }
 
@@ -130,5 +132,19 @@ public class ProgressBar : MonoBehaviour
     public float GetProgress()
     {
         return currentProgress;
+    }
+    public void AddScore()
+    {
+        //需要一个Score
+        Text text = GameObject.FindWithTag("Score").GetComponent<Text>();
+        //需要一个Magnification
+        float mag = GameObject.FindWithTag("Magnification").GetComponent<Magnification>().GetCurrentMagnification();
+        float scr = sc.taskData.Score;
+        float res = scr * mag;
+
+        float temp = System.Convert.ToSingle(text.text);
+        temp += res;
+        text.text = System.Convert.ToString(temp);
+
     }
 }

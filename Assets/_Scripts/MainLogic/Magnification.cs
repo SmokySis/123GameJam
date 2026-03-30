@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MagnificationSystem : MonoBehaviour
+public class Magnification : MonoBehaviour
 {
     [Header("倍率设置")]
     public float magnification = 1.0f; // 当前倍率
