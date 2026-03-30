@@ -3,11 +3,21 @@ using PoolSystem;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
+
+enum TiringStates
+{ 
+    none_Tiring = 0,
+    low_Tiring = 1,
+    mid_Tiring = 2,
+    high_Tiring = 3,
+    full_Tiring = 4,
+}
+
+
 public class UIController : Singleton<UIController>
 {
     [Header("UI组件_时间")]
@@ -71,6 +81,7 @@ public class UIController : Singleton<UIController>
     List<string> detailedMessages;
     List<TextContainer> messageContainers = new List<TextContainer>();
     GameObject CurrentMissionButton;
+    [SerializeField] TiringStates currentTiringState;
 
     private void Awake()
     {
@@ -114,18 +125,28 @@ public class UIController : Singleton<UIController>
         batteryFillImage.color = lowBatteryColor;
     }
 
-    void RefreshTiring()
+    TiringStates RefreshTiring()
     {
         tiringFillImage.fillAmount = tiringPercent;
-        if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); return; }
-        if (tiringPercent > 0.9f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[3]; return; }
-        if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return; }
-        if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return; }
+        if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); return TiringStates.full_Tiring; }
+        if (tiringPercent > 0.9f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[3]; return TiringStates.high_Tiring; }
+        if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return TiringStates.mid_Tiring; }
+        if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return TiringStates.low_Tiring; }
         tiringHead.sprite = tiringHeads[0];
         if (tiringPercent < 0f )
             tiringPercent = 0;
         tiringFillImage.color = lowTiringColor;
+        return TiringStates.none_Tiring;
     }
+
+    void HandleTiringState(TiringStates settedState)
+    {
+        if (settedState != currentTiringState)
+        {
+
+        }
+    }
+
     private IEnumerator TiringDownCo()
     {
         tiringWarning.gameObject.SetActive(true);

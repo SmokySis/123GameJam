@@ -8,6 +8,7 @@ TagManager:
   - Slider
   - Score
   - Magnification
+  - Load
   layers:
   - Default
   - TransparentFX
