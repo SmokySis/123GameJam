@@ -31,12 +31,14 @@ public class Settlement : Utility.Singleton<Settlement>
     public string badComment = "Õœ—”÷¢ªº’ﬂ";
 
     private float _finalScore;
+    private bool _isDone;
     [Button]
-    public void End(int power, float score)
+    public void End(float power, float score)
     {
-        if (power <= 0)
+        if (power <= 0 && !_isDone)
         {
             _finalScore = score;
+            _isDone = true;
             StartCoroutine(EndScene());
         }
     }

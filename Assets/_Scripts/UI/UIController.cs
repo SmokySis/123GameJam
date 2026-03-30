@@ -104,6 +104,7 @@ public class UIController : Singleton<UIController>
         if (Input.GetKeyDown(KeyCode.Escape)) HandleESC();
         RefreshBattery();
         RefreshTiring();
+        Settlement.Instance.End(batteryPowerPercent, System.Convert.ToSingle(GameObject.FindWithTag("Score").GetComponent<UnityEngine.UI.Text>().text));
     }
 
     IEnumerator UpdateTime()

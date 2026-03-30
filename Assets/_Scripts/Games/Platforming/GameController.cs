@@ -7,6 +7,7 @@ using Utility;
 public class GameController : Singleton<GameController>
 {
     [SerializeField]public List<MapInfo> Maps = new List<MapInfo>();
+    [SerializeField] GameObject gamePanel;
     MapInfo activeMap = null;
     public bool isActive = false;
     public void LoadGame()
@@ -34,11 +35,13 @@ public class GameController : Singleton<GameController>
 
     public void FinishGame(float reduceTiring)
     {
-
+        UIController.Instance.tiringPercent -= reduceTiring;
+        ResetGame();
+        if (gamePanel) gamePanel.SetActive(false);
     }
 
     public void Failure()
     {
-
+        activeMap.ResetPlayer();
     }
 }

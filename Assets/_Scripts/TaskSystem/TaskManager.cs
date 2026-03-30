@@ -50,6 +50,10 @@ namespace TaskSystem
             if (!_isInitialized)
                 return;
             FlushLifecycleRequests();
+            if (layoutGroup != null)
+            {
+                LayoutRebuilder.MarkLayoutForRebuild(layoutGroup.GetComponent<RectTransform>());
+            }
         }
         public void Initialize(IReadOnlyDictionary<int, TaskData> allTaskData)
         {
@@ -303,12 +307,13 @@ namespace TaskSystem
                 Debug.LogError("ShowInfo Error: Text Component Is Null.");
                 return;
             }
-            string content = $"{task.Data.Description} \n{GetDifficultyColor(task.Data.TaskDifficulty)}¡¾{task.Data.TaskDifficulty}¡¿{ResetColor()}";
+            string content = $"{task.Data.Description}";
             uiText.text = string.Empty;
             int currentCount = 0;
             float duration = content.Length <= 0 ? 0f : content.Length / charsPerSecond;
             DOTween.To(() => currentCount, x => { currentCount = x; uiText.text = content.Substring(0, currentCount); }, content.Length, duration).SetEase(Ease.Linear).OnComplete(() =>
             {
+                uiText.text += $"\n{GetDifficultyColor(task.Data.TaskDifficulty)}¡¾{task.Data.TaskDifficulty}¡¿{ResetColor()}";
                 if (layoutGroup != null)
                 {
                     LayoutRebuilder.MarkLayoutForRebuild(layoutGroup.GetComponent<RectTransform>());
