@@ -55,6 +55,9 @@ MonoBehaviour:
   dif0: 0
   dif1: 0
   dif2: 0
+  speed0: 0
+  speed1: 0
+  speed2: 0
   anim: {fileID: 7697577322356713938}
   button: {fileID: 6309331932749171058}
   image: {fileID: 5655064622336168005}

@@ -14,7 +14,7 @@ public class ButtonClick : MonoBehaviour
 
     private float speed = 0f;
     [Header("三种难度速度变化")]
-    public float speed0 = 0f;
+    public float speed0 = 0.05f;
     public float speed1 = 0f;
     public float speed2 = 0f;
     public Animator anim;
@@ -47,7 +47,7 @@ public class ButtonClick : MonoBehaviour
     {
         if (isEnd == false)
         {
-            image.transform.localScale += Vector3.one * speed * Time.timeScale;//判定部分随时间增大       
+            image.transform.localScale += Vector3.one * speed * Time.deltaTime;//判定部分随时间增大       
         }
         imageScale = image.transform.localScale;     
         if (image.transform.localScale.x - Vector3.one.x * 1.2f > 0)
@@ -100,6 +100,7 @@ public class ButtonClick : MonoBehaviour
                 break;
             
         }
+
     }
     //动画之后摧毁物体
     public void DestroyGameObject()
