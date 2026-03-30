@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using Utility;
+using static Unity.VisualScripting.Member;
 namespace AudioSystem
 {
     public class AudioManager : Singleton<AudioManager>
@@ -129,6 +130,7 @@ namespace AudioSystem
                    else
                        outGroup = audioEvent.mixerGroup;
                    pooled.Source.outputAudioMixerGroup = outGroup;
+                   //Debug.Log(pooled.Source.outputAudioMixerGroup.name+ pooled.gameObject.name);
                    // 如果不需要 update 跟随，可以直接挂 parent 跟随
                    if (follow != null && !followInUpdate)
                    {

@@ -5,7 +5,7 @@ using UnityEngine;
 using Utility;
 namespace PoolSystem
 {
-    public class GameObjectPool :IReference<GameObjectPool>
+    public class GameObjectPool : IReference<GameObjectPool>
     {
         private int _poolID;
         private GameObject _prefab;
@@ -25,22 +25,22 @@ namespace PoolSystem
         {
             for (int i = 0; i < initialCapacity; i++)
             {
-                GameObject tempGO = GameObject.Instantiate(_prefab,_root.transform);
+                GameObject tempGO = GameObject.Instantiate(_prefab, _root.transform);
                 tempGO.AddComponent<BelongToPoolIDMarker>().PoolID = _poolID;
                 tempGO.SetActive(false);
                 _availableInstances.AddLast(tempGO);
             }
         }
-        public GameObject GetGameObject(Vector3 pos,Quaternion quaternion,Transform parent=null,Action<GameObject> onBeforeSetActive=null)
+        public GameObject GetGameObject(Vector3 pos, Quaternion quaternion, Transform parent = null, Action<GameObject> onBeforeSetActive = null)
         {
-            if(_availableInstances.Count==0)
+            if (_availableInstances.Count == 0)
                 Expand();
             LinkedListNode<GameObject> tempNode = _availableInstances.Last;
             _availableInstances.RemoveLast();
             GameObject tempGo = tempNode.Value;
             tempGo.transform.position = pos;
             tempGo.transform.rotation = quaternion;
-            if(parent)
+            if (parent)
                 tempGo.transform.SetParent(parent);
             onBeforeSetActive?.Invoke(tempGo);
             tempGo.SetActive(true);
@@ -66,7 +66,7 @@ namespace PoolSystem
             OnRecycle();
             _availableInstances = null;
         }
-        public IReference GetNewInstance() => new GameObjectPool() {_availableInstances=new(),_prefab=null,_root=null };
+        public IReference GetNewInstance() => new GameObjectPool() { _availableInstances = new(), _prefab = null, _root = null };
         #endregion
     }
 }

@@ -30,7 +30,7 @@ namespace AudioSystem
                 Debug.LogError("PooledAudioSource Init Error:Cant Find AudioSource");
                 return;
             }
-            ResetState();
+            //ResetState();
             _audioEvent = audioEvent;
             EventID = audioEvent.id;
             if (audioEvent.clips == null)
@@ -53,6 +53,7 @@ namespace AudioSystem
             Source.volume = Mathf.Clamp01(audioEvent.volume + UnityEngine.Random.Range(-audioEvent.volumeRandom, audioEvent.volumeRandom));
             Source.pitch = Mathf.Clamp(audioEvent.pitch + UnityEngine.Random.Range(-audioEvent.pitchRandom, audioEvent.pitchRandom), -3f, 3f);
             Source.loop = audioEvent.loop;
+            //Debug.Log(Source.outputAudioMixerGroup.name);
             if (audioEvent.is3D)
             {
                 Source.spatialBlend = Mathf.Clamp01(audioEvent.spatialBlend);
