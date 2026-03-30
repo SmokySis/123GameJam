@@ -61,6 +61,10 @@ public class ButtonClick : MonoBehaviour
     /// </summary>
     public void Judgment()
     {
+        if (isClicked)
+        {
+            return;
+        }
         isEnd = true;
         isClicked = true;
         Vector3 difference = buttonScale - imageScale;       
