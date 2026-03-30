@@ -15,7 +15,7 @@ public class CameraController : Singleton<CameraController>
     private void Start()
     {
         if (currentPlayer != null) playerTransform = currentPlayer.transform;
-        else transform.position = Vector2.zero;
+        else transform.position = new Vector3(0,0, transform.position.z);
     }
 
     private void Update()

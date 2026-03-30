@@ -26,9 +26,9 @@ public class GameController : Singleton<GameController>
     public void ResetGame()
     {
         isActive = false;
-        activeMap.gameObject.SetActive(false);
         activeMap.ResetPlayer();
         CameraController.Instance.SetPlayer(null);
+        activeMap.gameObject.SetActive(false);
         activeMap = null;
     }
 

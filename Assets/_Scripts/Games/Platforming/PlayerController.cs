@@ -67,9 +67,6 @@ public class PlayerController : MonoBehaviour
     public ParticleSystem dashTrailParticles;
     private ParticleSystem.EmissionModule emission;
 
-    
-
-
     [Header("速度相关")]
     public static float HorizentalSpeed;
     public static float VerticalSpeed;
@@ -78,19 +75,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("下落相关")]
     public static float fallingAddForce;
-  
-    void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-        DontDestroyOnLoad(gameObject);
-    }
 
     void Start()
     {
@@ -582,7 +566,7 @@ public class PlayerController : MonoBehaviour
     void Initicialize()
     {
         groundCheckPoint = new Vector3(transform.position.x, transform.position.y - 0.5F * GetComponent<Renderer>().bounds.size.y, transform.position.z);
-        Player = instance.gameObject;
+        Player = gameObject;
         rb = Player.GetComponent<Rigidbody2D>();
         if (dashTrailParticles != null)
         {
