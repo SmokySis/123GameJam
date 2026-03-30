@@ -10272,7 +10272,7 @@ MonoBehaviour:
   dif2: 0
   sliderPrefab: {fileID: 6130680104477722136, guid: 08cf83478bc78b54383b2c561a555642, type: 3}
   panelRect: {fileID: 1238711211}
-  taskID: 1001
+  taskID: 6001
   taskData: {fileID: 0}
   sliderClone: {fileID: 0}
 --- !u!1 &1262042766
