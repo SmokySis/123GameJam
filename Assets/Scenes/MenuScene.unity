@@ -122,6 +122,54 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &260144005
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 260144007}
+  - component: {fileID: 260144006}
+  m_Layer: 0
+  m_Name: CursorHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &260144006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260144005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec2431a3b60f0c4f8dcdc74a02e533d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalCursor: {fileID: 2800000, guid: 210941e5ae99bd743a0ae4248c1c28e7, type: 3}
+  pressedCursor: {fileID: 2800000, guid: 43fdc16c5d82470429d5122cdf634f70, type: 3}
+  hotspot: {x: -2, y: 2}
+  cursorMode: 1
+--- !u!4 &260144007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 260144005}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.285365, y: 5.344935, z: 1591.1621}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &287093250
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,8 +669,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8360506a7454ade4b90565c3c4c1e923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainSceneName: New Scene
-  MenuSceneName: MainMenu
+  MainSceneName: MainScene
+  MenuSceneName: MenuScene
   LoadPanel: {fileID: 1896182795}
   fadeInTime: 3
   darkTime: 1
@@ -1246,3 +1294,4 @@ SceneRoots:
   - {fileID: 1456421372}
   - {fileID: 287093252}
   - {fileID: 1588847440}
+  - {fileID: 260144007}

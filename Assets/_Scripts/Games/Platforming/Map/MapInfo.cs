@@ -9,11 +9,7 @@ public class MapInfo : MonoBehaviour
     public int mapID = -1;
 
     public GameObject GetPlayer() => mapPlayer;
-    public void ResetPlayer()
-    {
-        mapPlayer.GetComponent<Rigidbody2D>().position = InitPlayerPos;
-        //mapPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-    }
+    public void ResetPlayer()  { mapPlayer.GetComponent<Rigidbody2D>().position = InitPlayerPos; mapPlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero; }
 
     private void Awake()
     {

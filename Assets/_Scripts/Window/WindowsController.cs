@@ -1,11 +1,9 @@
 using DG.Tweening;
-using DG.Tweening.Core.Easing;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using TaskSystem;
 using TaskSystem.Event;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;

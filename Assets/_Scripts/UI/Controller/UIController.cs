@@ -82,9 +82,6 @@ public class UIController : Singleton<UIController>
     List<TextContainer> messageContainers = new List<TextContainer>();
     GameObject CurrentMissionButton;
     [SerializeField] TiringStates currentTiringState;
-    [SerializeField] GameObject tiringBubble;
-    [SerializeField] float bubbleShowTime = 2f;
-    [SerializeField] float bubbleFadeOutTime = 5f;
 
     private void Awake()
     {
@@ -132,7 +129,7 @@ public class UIController : Singleton<UIController>
     TiringStates RefreshTiring()
     {
         tiringFillImage.fillAmount = tiringPercent;
-        if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); StartCoroutine(ShowDialogueBubbleCoroutine()); return TiringStates.full_Tiring; }
+        if (tiringPercent > 1f) { StartCoroutine(TiringDownCo()); return TiringStates.full_Tiring; }
         if (tiringPercent > 0.9f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[3]; return TiringStates.high_Tiring; }
         if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return TiringStates.mid_Tiring; }
         if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return TiringStates.low_Tiring; }
@@ -149,23 +146,6 @@ public class UIController : Singleton<UIController>
         {
 
         }
-    }
-
-    private IEnumerator ShowDialogueBubbleCoroutine()
-    {
-        tiringBubble.SetActive(true);
-        Image image = tiringBubble.GetComponent<Image>();
-        image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
-        yield return new WaitForSeconds(bubbleShowTime);
-
-
-        while (image.color.a > 0 )
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, image.color.a - (1f / bubbleFadeOutTime) * Time.deltaTime);
-            yield return null;
-        }
-
-        tiringBubble.SetActive(false);
     }
 
     private IEnumerator TiringDownCo()

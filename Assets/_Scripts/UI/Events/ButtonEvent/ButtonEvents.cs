@@ -1,6 +1,10 @@
 using AudioSystem;
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TaskSystem;
 using TaskSystem.Test;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class ButtonEvent : MonoBehaviour
@@ -12,7 +16,7 @@ public class ButtonEvent : MonoBehaviour
     }
 
     [SerializeField] GameObject panel;
-    public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void StartButtonOnclick() { panel.SetActive(true); TaskManager.Instance.TaskEventCenter.RaiseBegin(new APPOpenEvent()); panel.GetComponent<RectTransform>().SetAsLastSibling(); AudioManager.Instance.Play("Au_UI_Click"); }
     public void CloseButtonOnClick() { panel.SetActive(false); AudioManager.Instance.Play("Au_UI_Click"); }
     public void StartSettingButtonOnClick() { controller.SetPause(); AudioManager.Instance.Play("Au_UI_Click"); }
     public void CloseSettingButtonOnClick() { controller.SetPlay(); AudioManager.Instance.Play("Au_UI_Click"); }

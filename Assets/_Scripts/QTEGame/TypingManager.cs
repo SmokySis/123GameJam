@@ -1,11 +1,6 @@
-using Sirenix.OdinInspector.Editor.GettingStarted;
-using System.Collections;
-using System.Collections.Generic;
 using TaskSystem;
 using TaskSystem.Event;
 using UnityEngine;
-using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class TypingManager : MonoBehaviour
 {

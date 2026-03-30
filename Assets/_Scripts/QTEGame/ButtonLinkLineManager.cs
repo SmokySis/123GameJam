@@ -1,12 +1,8 @@
-using Sirenix.OdinInspector.Editor.GettingStarted;
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TaskSystem;
 using TaskSystem.Event;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ButtonLinkLineManager : MonoBehaviour
 {

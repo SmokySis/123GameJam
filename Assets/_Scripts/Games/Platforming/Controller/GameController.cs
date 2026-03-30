@@ -7,23 +7,17 @@ public class GameController : Singleton<GameController>
 {
     [SerializeField]public List<MapInfo> Maps = new List<MapInfo>();
     [SerializeField] GameObject gamePanel;
-    [SerializeField] GameObject learnPanel;
     MapInfo activeMap = null;
     public bool isActive = false;
-    public List<int>ActiveMaps = new List<int>();
     public void LoadGame()
     {
-        if (ActiveMaps.Count == Maps.Count) { ShowLearnPanel(); return; }
-
-        int mapID;
         isActive = true;
-        do { mapID = Random.Range(0, Maps.Count); } while (ActiveMaps.Contains(mapID));
-
+        int mapID = Random.Range(0,Maps.Count);
         for (int i = 0; i < Maps.Count; i++)
         {
             if (Maps[i].mapID == mapID) activeMap = Maps[i];
         }
-        ActiveMaps.Add(mapID);
+
         activeMap.gameObject.SetActive(true);
         CameraController.Instance.SetPlayer(activeMap.GetPlayer());
         Debug.Log(activeMap.GetPlayer());
@@ -31,9 +25,7 @@ public class GameController : Singleton<GameController>
 
     public void ResetGame()
     {
-        if (ActiveMaps.Count == Maps.Count) { isActive = false; return; }
-
-            isActive = false;
+        isActive = false;
         activeMap.ResetPlayer();
         CameraController.Instance.SetPlayer(null);
         activeMap.gameObject.SetActive(false);
@@ -46,11 +38,6 @@ public class GameController : Singleton<GameController>
         GameObject.FindWithTag("Score").GetComponent<Text>().text = (System.Convert.ToSingle(GameObject.FindWithTag("Score").GetComponent<Text>().text) + 1000).ToString();
         ResetGame();
         if (gamePanel) gamePanel.SetActive(false);
-    }
-
-    public void ShowLearnPanel()
-    {
-        learnPanel.SetActive(true);
     }
 
     public void Failure()
