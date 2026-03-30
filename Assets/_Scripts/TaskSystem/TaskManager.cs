@@ -24,6 +24,8 @@ namespace TaskSystem
         private GameObject _textPrefab;
         [SerializeField, LabelText("文本出现速度")]
         private float charsPerSecond = 20f;
+        [SerializeField, LabelText("文本框")]
+        private VerticalLayoutGroup layoutGroup;
         private readonly Dictionary<int, Task> _idToTask = new();
         private readonly HashSet<int> _waitingTasks = new();
         private readonly HashSet<int> _activeNecessaryTasks = new();
@@ -272,6 +274,21 @@ namespace TaskSystem
             _idToTask.Remove(taskID);
             return true;
         }
+        string GetDifficultyColor(TaskDifficulty difficulty)
+        {
+            switch (difficulty)
+            {
+                case TaskDifficulty.简单:
+                    return "<color=green>";
+                case TaskDifficulty.中等:
+                    return "<color=yellow>";
+                case TaskDifficulty.困难:
+                    return "<color=red>";
+                default:
+                    return "<color=white>";
+            }
+        }
+        string ResetColor() => "</color>";
         private void ShowInfo(Task task)
         {
             GameObject textObj;
@@ -286,11 +303,17 @@ namespace TaskSystem
                 Debug.LogError("ShowInfo Error: Text Component Is Null.");
                 return;
             }
-            string content = task.Data.Description ?? string.Empty;
+            string content = $"{task.Data.Description} \n{GetDifficultyColor(task.Data.TaskDifficulty)}【{task.Data.TaskDifficulty}】{ResetColor()}";
             uiText.text = string.Empty;
             int currentCount = 0;
             float duration = content.Length <= 0 ? 0f : content.Length / charsPerSecond;
-            DOTween.To(() => currentCount, x => { currentCount = x; uiText.text = content.Substring(0, currentCount); }, content.Length, duration).SetEase(Ease.Linear);
+            DOTween.To(() => currentCount, x => { currentCount = x; uiText.text = content.Substring(0, currentCount); }, content.Length, duration).SetEase(Ease.Linear).OnComplete(() =>
+            {
+                if (layoutGroup != null)
+                {
+                    LayoutRebuilder.MarkLayoutForRebuild(layoutGroup.GetComponent<RectTransform>());
+                }
+            });
             task.RuntimeData.TextObj = textObj;
         }
         private void HideInfo(Task task)

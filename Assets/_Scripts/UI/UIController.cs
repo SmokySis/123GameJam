@@ -23,7 +23,7 @@ public class UIController : Singleton<UIController>
     [SerializeField] CanvasGroup canvasGroup;
     [SerializeField] Image tiringHead;
     [SerializeField] List<Sprite> tiringHeads;
-    [SerializeField] Text tiringWarning;
+    [SerializeField] GameObject tiringWarning;
 
     [Header("UI组件_音量")]
     [SerializeField] Slider masterSlider;
@@ -54,8 +54,8 @@ public class UIController : Singleton<UIController>
     [SerializeField] Color midTiringColor = Color.yellow;
     [SerializeField] Color lowTiringColor = Color.green;
     [Header("UI状态")]
-    [HideInInspector]public bool isPaused = false;
-    [HideInInspector]public bool isAudioOpen = false;
+    [HideInInspector] public bool isPaused = false;
+    [HideInInspector] public bool isAudioOpen = false;
     [Header("协程")]
     Coroutine MessageCoroutine;
     Coroutine DialogueCoroutine;
@@ -85,7 +85,7 @@ public class UIController : Singleton<UIController>
         bgmSlider.onValueChanged.AddListener(OnBGMSliderValueChanged);
         sfxSlider.onValueChanged.AddListener(OnSFXSliderValueChanged);
 
-       // StartCoroutine(MessagePanelCoroutine("Testing"));
+        // StartCoroutine(MessagePanelCoroutine("Testing"));
     }
 
     private void Update()
@@ -98,7 +98,7 @@ public class UIController : Singleton<UIController>
     IEnumerator UpdateTime()
     {
         WaitForSeconds time = new WaitForSeconds(1f);
-        while (true) 
+        while (true)
         {
             timeShower.text = System.DateTime.Now.ToString("HH:mm:ss");
             yield return time;
@@ -122,12 +122,17 @@ public class UIController : Singleton<UIController>
         if (tiringPercent > 0.75f) { tiringFillImage.color = fullTiringColor; tiringHead.sprite = tiringHeads[2]; return; }
         if (tiringPercent > 0.25f) { tiringFillImage.color = midTiringColor; tiringHead.sprite = tiringHeads[1]; return; }
         tiringHead.sprite = tiringHeads[0];
+        if (tiringPercent < 0f )
+            tiringPercent = 0;
         tiringFillImage.color = lowTiringColor;
     }
     private IEnumerator TiringDownCo()
     {
         tiringWarning.gameObject.SetActive(true);
         bool isActive = bilibili.gameObject.activeSelf;
+        Image image = bilibili.GetComponent<Image>();
+        float num = image.color.a;
+        image.color = new Color() { r = image.color.r, g = image.color.g, b = image.color.b, a = 1f };
         bilibili.gameObject.SetActive(true);
         bilibili.SetForeground();
         canvasGroup.interactable = false;
@@ -140,6 +145,7 @@ public class UIController : Singleton<UIController>
         }
         tiringPercent = 0;
         tiringWarning.gameObject.SetActive(false);
+        image.color = new Color() { r = image.color.r, g = image.color.g, b = image.color.b, a = num };
         bilibili.gameObject.SetActive(isActive);
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
@@ -198,7 +204,7 @@ public class UIController : Singleton<UIController>
     {
         bgmVolume = value;
         bgmText.text = ((int)(value * 100)).ToString();
-        RefreshVolumn();    
+        RefreshVolumn();
     }
 
     void OnSFXSliderValueChanged(float value)
@@ -210,8 +216,8 @@ public class UIController : Singleton<UIController>
 
     void RefreshVolumn()
     {
-        mixer.TrySetBusVolume(AudioBus.BGM,bgmVolume * masterVolume);
-        mixer.TrySetBusVolume(AudioBus.SFX,sfxVolume * masterVolume);
+        mixer.TrySetBusVolume(AudioBus.BGM, bgmVolume * masterVolume);
+        mixer.TrySetBusVolume(AudioBus.SFX, sfxVolume * masterVolume);
     }
 
     void InitVolumn()
@@ -266,7 +272,7 @@ public class UIController : Singleton<UIController>
         Debug.Log("ShowDialoge");
         if (detailedMessages == null) yield break;
 
-        for (int i = 0;i < detailedMessages.Count;i++)
+        for (int i = 0; i < detailedMessages.Count; i++)
         {
             messageContainers[i].gameObject.SetActive(true);
             messageContainers[i].SetSize();
@@ -283,7 +289,7 @@ public class UIController : Singleton<UIController>
 
     public void ReleaseDetailedPanel()
     {
-        for (int i = detailedMessages.Count - 1; i >= 0 ;i--)
+        for (int i = detailedMessages.Count - 1; i >= 0; i--)
         {
             poolCenter.Release(messageContainers[i].gameObject);
         }
@@ -295,7 +301,7 @@ public class UIController : Singleton<UIController>
         GameObject buttonObject = poolCenter.GetInstance(MessageButtonPrefab, Vector3.zero, Quaternion.identity, DetailedTextPanel.transform, null, true);
         Button button = buttonObject.GetComponent<Button>() ? buttonObject.GetComponent<Button>() : buttonObject.AddComponent<Button>();
         button.GetComponent<RectTransform>().localScale = Vector3.one;
-        button.onClick.AddListener(() => { action?.Invoke(); } );
+        button.onClick.AddListener(() => { action?.Invoke(); });
         CurrentMissionButton = buttonObject;
         CurrentMissionButton.SetActive(false);
     }

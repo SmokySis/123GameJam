@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TaskSystem;
 using TaskSystem.Event;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.UI;
 using Utility;
@@ -117,9 +118,33 @@ public class WindowsController : Singleton<WindowsController>
         seq.AppendInterval(0.5f);
         seq.Append(panelRect.DOAnchorPosX(finalX, 2.5f).SetEase(Ease.InOutCubic));
 
+
         yield return seq.WaitForCompletion();
 
         _panelCoroutine = null;
+    }
+    public Window GetWindowWithMaxSiblingIndex()
+    {
+        if (_windows == null || _windows.Count == 0)
+            return null;
+
+        Window maxWindow = _windows[0];
+        int maxIndex = maxWindow.transform.GetSiblingIndex();
+
+        for (int i = 1; i < _windows.Count; i++)
+        {
+            if (_windows[i].gameObject.activeSelf)
+            {
+                int currentIndex = _windows[i].transform.GetSiblingIndex();
+                if (currentIndex > maxIndex)
+                {
+                    maxIndex = currentIndex;
+                    maxWindow = _windows[i];
+                }
+            }
+        }
+
+        return maxWindow;
     }
     public void OpenTaskCo()
     {
@@ -158,6 +183,14 @@ public class WindowsController : Singleton<WindowsController>
                 _tired += window.AddTired();
                 newRate += 0.15f;
             }
+        }
+        if (!ForegroundWindow.gameObject.activeSelf)
+        {
+            Window maxWindow = GetWindowWithMaxSiblingIndex();
+            if (maxWindow != null)
+                maxWindow.SetForeground();
+            else
+                SetForeground(_windows[_windows.Count - 1]);
         }
         _powerRate = Mathf.Max(newRate - 0.15f, 1);
     }
