@@ -7,8 +7,8 @@ public class ButtonClickManager : MonoBehaviour
 {
 
 
-    private GameObject sliderClone;
-    private ProgressBar progressBar;
+    public  GameObject sliderClone;
+    public  ProgressBar progressBar;
     public GameObject buttonClickPrefab;
     public RectTransform panelRect;//³ÐÔØµÄpanel
                                    
@@ -28,8 +28,8 @@ public class ButtonClickManager : MonoBehaviour
     public float minDistance = 210f;
     private List<Vector2> spawnPoints = new List<Vector2>();
     bool isGet;
-    bool isStart = false;
-    bool isGenerate = false;
+    public bool isStart = false;
+    public bool isGenerate = false;
     public float startTime = 0.25f;
     private void OnEnable()
     {
@@ -53,18 +53,18 @@ public class ButtonClickManager : MonoBehaviour
             progressBar = sliderClone.GetComponent<ProgressBar>();
             difficulty = progressBar.difficulty;
             isGet = true;
-            //switch (difficulty)
-            //{
-            //    case 0:
-            //        spawnCount = 5;
-            //        break;
-            //    case 1:
-            //        spawnCount = 10;
-            //        break;
-            //    case 2:
-            //        spawnCount = 20;
-            //        break;
-            //}
+            switch (difficulty)
+            {
+                case 0:
+                    spawnCount = 5;
+                    break;
+                case 1:
+                    spawnCount = 10;
+                    break;
+                case 2:
+                    spawnCount = 20;
+                     break;
+            }
         }
         if (progressBar == null)
             return;
@@ -74,7 +74,7 @@ public class ButtonClickManager : MonoBehaviour
             isStart = true;
             GenerateNonOverlappingPoints();
         }
-        if(spawnPoints.Count == 10 && !isGenerate)
+        if(spawnPoints.Count == spawnCount && !isGenerate)
         {
             isGenerate = true;
             StartCoroutine(Generate());        

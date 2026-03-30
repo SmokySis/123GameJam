@@ -36,6 +36,7 @@ public class Magnification : MonoBehaviour
             magnification = 1.0f;
             _lastIncreaseTime = Time.time;
         }
+        magnification = Mathf.Round(magnification * 10f) / 10f;
         text1.text = magnification.ToString();
     }
 
