@@ -9676,8 +9676,8 @@ MonoBehaviour:
   speed1: 0.5
   speed2: 0.7
   spawnCount: 20
-  squareSize: 200
-  minDistance: 210
+  squareSize: 100
+  minDistance: 100
   isStart: 0
   isGenerate: 0
   startTime: -1
@@ -12193,8 +12193,8 @@ MonoBehaviour:
   speed1: 0.5
   speed2: 0.7
   spawnCount: 5
-  squareSize: 150
-  minDistance: 150
+  squareSize: 100
+  minDistance: 100
   isStart: 0
   isGenerate: 0
   startTime: -1

@@ -1,8 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
+using System.Collections;
 using TaskSystem;
 using TaskSystem.Event;
 using TaskSystem.Subscriber;
+using UnityEngine;
+using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class ProgressBar : MonoBehaviour
 {    
@@ -74,7 +76,7 @@ public class ProgressBar : MonoBehaviour
             switch (id % 1000)
             {               
                 case 1:
-                    TaskManager.Instance.TaskEventCenter.RaiseRunning(new End1Event() {ID=id });
+                    TaskManager.Instance.TaskEventCenter.RaiseRunning(new End1Event() { ID = id });
                     break;
                 case 2:
                     TaskManager.Instance.TaskEventCenter.RaiseRunning(new End2Event() { ID = id });
@@ -136,15 +138,20 @@ public class ProgressBar : MonoBehaviour
     public void AddScore()
     {
         //需要一个Score
-        Text text = GameObject.FindWithTag("Score").GetComponent<Text>();
+        UnityEngine.UI.Text text = GameObject.FindWithTag("Score").GetComponent<UnityEngine.UI.Text>();
+        StartCoroutine(DoAfterDelay(0.1f,text));       
+
+    }
+    IEnumerator DoAfterDelay(float delay, UnityEngine.UI.Text text)
+    {
+        yield return new WaitForSeconds(delay); // 等待指定秒数
         //需要一个Magnification
         float mag = GameObject.FindWithTag("Magnification").GetComponent<Magnification>().GetMagnification();
-        float scr = sc.taskData.Score;                
+        float scr = sc.taskData.Score;
         float res = scr * mag;
 
         float temp = System.Convert.ToSingle(text.text);
         temp += res;
-        text.text = System.Convert.ToString(temp);
-
+        text.text = System.Convert.ToString(temp);        
     }
 }
