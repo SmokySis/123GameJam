@@ -18,7 +18,7 @@ public class SliderCreating : MonoBehaviour
     public int taskID;  
     public TaskData taskData;
 
-    private GameObject sliderClone;    
+    public GameObject sliderClone;    
     private void OnEnable()
     {
         taskData = TaskLoader.Instance.GetTaskData(taskID);

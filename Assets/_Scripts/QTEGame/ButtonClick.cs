@@ -24,6 +24,7 @@ public class ButtonClick : MonoBehaviour
     public Vector3 imageScale;
     private bool isEnd;//是否已经结束
     private bool isClicked;//是否已经被点击
+    public ProgressBar g;
     private void Start()
     {       
         isEnd = false;
@@ -85,18 +86,17 @@ public class ButtonClick : MonoBehaviour
         
     }
     private void Score(int dif)
-    {
-        ProgressBar gameObject = GameObject.FindWithTag("Slider").gameObject.GetComponent<ProgressBar>();
+    {   
         switch (dif)
         {
             case 0:
-                gameObject.currentProgress += dif0;
+                g.currentProgress += dif0;
                 break;
             case 1:
-                gameObject.currentProgress += dif1;
+                g.currentProgress += dif1;
                 break;
             case 2:
-                gameObject.currentProgress += dif2;
+                g.currentProgress += dif2;
                 break;
             
         }

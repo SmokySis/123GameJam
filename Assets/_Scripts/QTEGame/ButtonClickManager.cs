@@ -42,12 +42,17 @@ public class ButtonClickManager : MonoBehaviour
     }
     private void OnDisable()
     {
+        List<GameObject> allTargets = FindInactiveObjectsWithTag("Button");
+        foreach (var item in allTargets)
+        {
+            //Destroy(item);            
+        }
         
     }
     private void Update()
     {
         if (sliderClone == null)
-            sliderClone = GameObject.FindWithTag("Slider");
+            sliderClone = this.gameObject.GetComponent<SliderCreating>().sliderClone;
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
@@ -66,7 +71,7 @@ public class ButtonClickManager : MonoBehaviour
                      break;
             }
         }
-        if (progressBar == null)
+        if (!sliderClone.activeSelf)
             return;
         //等到开始任务后几秒再开始造点
         if(progressBar.GetProgress() > startTime && !isStart)
@@ -128,6 +133,7 @@ public class ButtonClickManager : MonoBehaviour
             square.GetComponent<ButtonClick>().speed0 = this.speed0;
             square.GetComponent<ButtonClick>().speed1 = this.speed1;
             square.GetComponent<ButtonClick>().speed2 = this.speed2;
+            square.GetComponent<ButtonClick>().g = progressBar;
 
 
             RectTransform squareRect = square.GetComponent<RectTransform>();
@@ -139,5 +145,19 @@ public class ButtonClickManager : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
+    }
+    public List<GameObject> FindInactiveObjectsWithTag(string tag)
+    {
+        List<GameObject> result = new List<GameObject>();
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject go in allObjects)
+        {
+            if (go.CompareTag(tag))
+            {
+                result.Add(go);
+            }
+        }
+        return result;
     }
 }

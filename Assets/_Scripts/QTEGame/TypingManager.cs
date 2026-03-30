@@ -48,18 +48,15 @@ public class TypingManager : MonoBehaviour
     private void Update()
     {
         if (sliderClone == null)
-            sliderClone = GameObject.FindWithTag("Slider");
+            sliderClone = this.gameObject.GetComponent<SliderCreating>().sliderClone;
         if (sliderClone != null && !isGet)
         {
             progressBar = sliderClone.GetComponent<ProgressBar>();
             difficulty = progressBar.difficulty;
             isGet = true;
         }
-
-        if (progressBar == null)
-        {
+        if (!sliderClone.activeSelf)
             return;
-        }
 
         if (progressBar.GetProgress() > startTime && !isStart)
         {
