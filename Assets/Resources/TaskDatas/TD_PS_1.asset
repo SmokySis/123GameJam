@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 4001
-  Description: "\u25A1 \u753B\u7B56\u5212\u53C2\u8003\u56FE"
+  Description: "\u25A1 PS\u753B\u7B56\u5212\u53C2\u8003\u56FE"
   IsNecessary: 1
   Score: 500
   TaskDifficulty: 0

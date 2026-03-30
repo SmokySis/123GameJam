@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 1001
-  Description: "\u25A1 \u641C\u7D22\u53C2\u8003\u56FE"
+  Description: "\u25A1 \u6D4F\u89C8\u5668\u641C\u7D22\u53C2\u8003\u56FE"
   IsNecessary: 1
   Score: 100
   TaskDifficulty: 0

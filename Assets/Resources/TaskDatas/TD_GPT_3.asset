@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 2003
-  Description: "\u25A1 \u95EE\u5FAE\u79EF\u5206\u4F5C\u4E1A"
+  Description: "\u25A1 \u95EEGPT\u5FAE\u79EF\u5206\u4F5C\u4E1A"
   IsNecessary: 1
   Score: 500
   TaskDifficulty: 2

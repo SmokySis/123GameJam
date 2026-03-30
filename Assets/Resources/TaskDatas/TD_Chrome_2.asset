@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 1002
-  Description: "\u25A1 \u641C\u7D22MOOC\u7B54\u6848"
+  Description: "\u25A1 \u6D4F\u89C8\u5668\u641C\u7D22MOOC\u7B54\u6848"
   IsNecessary: 1
   Score: 200
   TaskDifficulty: 1

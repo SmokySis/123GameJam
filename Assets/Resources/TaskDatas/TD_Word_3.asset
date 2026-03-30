@@ -58,7 +58,7 @@ MonoBehaviour:
       Entry: 8
       Data: 
   ID: 6003
-  Description: "\u25A1 \u5B8C\u6210\u5B9E\u9A8C\u62A5\u544A"
+  Description: "\u25A1 Word\u5B8C\u6210\u5B9E\u9A8C\u62A5\u544A"
   IsNecessary: 1
   Score: 800
   TaskDifficulty: 2
