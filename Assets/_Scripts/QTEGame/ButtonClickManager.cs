@@ -14,14 +14,14 @@ public class ButtonClickManager : MonoBehaviour
                                    
     public int difficulty;//难度系数
     [Header("三种难度加的数值")]
-    public float dif0 = 0.1f;
-    public float dif1 = 0.05f;
-    public float dif2 = 0.02f;
+    public float dif0 = 0.2f;
+    public float dif1 = 0.10f;
+    public float dif2 = 0.05f;
 
     [Header("三种难度速度变化")]
-    public float speed0 = 0f;
-    public float speed1 = 0f;
-    public float speed2 = 0f;
+    public float speed0 = 0.4f;
+    public float speed1 = 0.5f;
+    public float speed2 = 0.7f;
 
     public int spawnCount = 10;
     public float squareSize = 200f;    
@@ -53,6 +53,18 @@ public class ButtonClickManager : MonoBehaviour
             progressBar = sliderClone.GetComponent<ProgressBar>();
             difficulty = progressBar.difficulty;
             isGet = true;
+            switch (difficulty)
+            {
+                case 0:
+                    spawnCount = 5;
+                    break;
+                case 1:
+                    spawnCount = 10;
+                    break;
+                case 2:
+                    spawnCount = 20;
+                    break;
+            }
         }
         if (progressBar == null)
             return;

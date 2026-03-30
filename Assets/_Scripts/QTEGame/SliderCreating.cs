@@ -10,9 +10,9 @@ public class SliderCreating : MonoBehaviour
 
     public int difficulty;//难度
     [Header("三种难度加的数值,填百分比")]
-    public float dif0 = 0f;
-    public float dif1 = 0f;
-    public float dif2 = 0f;
+    public float dif0 = 0.08f;
+    public float dif1 = 0.05f;
+    public float dif2 = 0.02f;
     public GameObject sliderPrefab;
     public RectTransform panelRect;//承载的panel
     public int taskID;  

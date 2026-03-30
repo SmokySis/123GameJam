@@ -11,9 +11,9 @@ public class TypingManager : MonoBehaviour
 {
     public int difficulty;//传入的难度系数
     [Header("三种难度加的数值")]
-    public float dif0 = 0f;
-    public float dif1 = 0f;
-    public float dif2 = 0f;
+    public float dif0 = 1f;
+    public float dif1 = 1f;
+    public float dif2 = 1f;
 
     private GameObject sliderClone;
     private ProgressBar progressBar;
