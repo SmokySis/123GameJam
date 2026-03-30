@@ -28,7 +28,7 @@ public class ButtonEvent : MonoBehaviour
 
     public void BackToMainMenuOnClick() { LoadSceneManager.Instance.LoadMenuScene(); AudioManager.Instance.Play("Au_UI_Click"); }
 
-    public void LoadMainSceneOnClick() { LoadSceneManager.Instance.LoadMainScene(); AudioManager.Instance.Play("Au_UI_Click"); }
+    public void LoadMainSceneOnClick() { LoadSceneManager.Instance.LoadMainScene();}
 
     public void ExitGameOnClick() {AudioManager.Instance.Play("Au_UI_Click"); Application.Quit();}
 }

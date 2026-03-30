@@ -20,7 +20,7 @@ namespace Utility
                 if (_instance == null || _instance.IsUnityNull())
                 {
                     _instance = FindAnyObjectByType<T>();
-                    if (_instance == null || _instance.IsUnityNull())
+                    if ((_instance == null || _instance.IsUnityNull())&& AutoGenenrate)
                     {
                         CreateInstance?.Invoke();
                         if (!_instance.awaked)
@@ -36,6 +36,8 @@ namespace Utility
         /// 是否退出场景不摧毁自身
         /// </summary>
         protected virtual bool _isDonDestroyOnLoad => false;
+        protected static bool AutoGenenrate=> false;
+        protected virtual bool _autoGenenrate => false;
         /// <summary>
         /// 创建逻辑
         /// </summary>
