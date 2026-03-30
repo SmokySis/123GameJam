@@ -26,13 +26,7 @@ MonoBehaviour:
       Data: 0|EventSystem.IEventSubscriber[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 1|TaskSystem.Test.AutoActivateOnGameStartedSubscriber, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -41,16 +35,10 @@ MonoBehaviour:
       Data: 
     - Name: RuntimeSubscribers
       Entry: 7
-      Data: 2|EventSystem.IEventSubscriber[], Assembly-CSharp
+      Data: 1|EventSystem.IEventSubscriber[], Assembly-CSharp
     - Name: 
       Entry: 12
-      Data: 1
-    - Name: 
-      Entry: 7
-      Data: 3|TaskSystem.Test.EndSubscriber, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
+      Data: 0
     - Name: 
       Entry: 13
       Data: 
@@ -61,3 +49,5 @@ MonoBehaviour:
   Description: ASZDFawsedfAwsFszadFGAZsdafgsdfgawesdfawfwefasdfasdfasdg
   IsNecessary: 1
   Score: 0
+  TaskDifficulty: 0
+  text: []
